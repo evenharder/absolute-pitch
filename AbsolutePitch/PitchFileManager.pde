@@ -1,13 +1,13 @@
 class PitchFileManager{
-  PitchFile pitch[]=new PitchFile[89];
+  PitchFile pitch[]=new PitchFile[Constant.PITCH_AMOUNT+1];
   PitchFileManager(Minim minim)
   {
-    for(int i=1;i<=88;i++)
+    for(int i=1;i<=Constant.PITCH_AMOUNT;i++)
     {
       printText(i);
       pitch[i]=new PitchFile(minim, i);
     }
-    printText(89);
+    printText(Constant.PITCH_AMOUNT+1);
   }
   
   String getProgressString(int i)
@@ -25,7 +25,7 @@ class PitchFileManager{
   
   void printText(int i)
   {
-    if(i<=88)
+    if(i<=Constant.PITCH_AMOUNT)
     {
       print("Stage Grand "+i+".mp3 loading... ");
     }
@@ -35,6 +35,7 @@ class PitchFileManager{
     }
     println(getProgressString(i));
   }
+  
   void playChord(Chord chord){
     ArrayList<Integer> pitchList=chord.getPitchList();
     for(int i : pitchList)

@@ -19,6 +19,8 @@ static final class Constant{
   static final String CHORD_HALF_DIMINISHED_7TH="half-diminished 7th";
   static final String CHORD_AUGMENTED_7TH="augmented 7th";
   
+  static final int PITCH_AMOUNT=88;
+  
   static final ArrayList<String> CHORD_LIST=new ArrayList<String>();
   static void setChordList()
   {
@@ -37,5 +39,4 @@ static final class Constant{
       CHORD_LIST.add(CHORD_AUGMENTED_7TH);
     }
   }
-  //TODO find more chords and investigate!
 }
