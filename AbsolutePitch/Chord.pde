@@ -110,7 +110,7 @@ class Chord{
     for(int cnt=0;cnt<pitchList.size();cnt++)
     {
       if(index==0) isRootPositioned=true;
-      realPitchList.add(rootPitch+pitchList.get(index)-(isRootPositioned ? 0 : 12 ));
+      realPitchList.add(rootPitch+pitchList.get(index)-(isRootPositioned ? 0 : 12));
       index++;
       index%=pitchList.size();
     }

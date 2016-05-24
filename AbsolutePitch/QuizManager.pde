@@ -1,7 +1,7 @@
 class QuizManager{
 
   private Chord chord;
-  private int count;
+  private int trial;
   private ArrayList<String> chordQualityList;
   private PitchFileManager pitchFileManager;
   
@@ -26,7 +26,7 @@ class QuizManager{
   
   boolean checkAnswer(String str, int level)
   {
-    count++;
+    trial++;
     println("Participant's answer : "+str);
     println("Jury's answer : "+chord.getChordQuality());
     if(str.equals(chord.getChordQuality()))

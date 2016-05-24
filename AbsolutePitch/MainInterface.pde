@@ -37,9 +37,13 @@ class MainInterface implements ControlP5Interface{
   
   private void setGUI()
   {
+    final int titleLabelxoff=100;
+    final int titleLabelyoff=30;
+    final int titleLabelylen=60;
+    
     cp5.addButton(titleLabelName)
-       .setPosition(100,30)
-       .setSize(500,60)
+       .setPosition(titleLabelxoff,titleLabelyoff)
+       .setSize(width-2*titleLabelxoff,titleLabelylen)
        .updateSize()
        .lock()
        .setColor(white)
@@ -53,17 +57,16 @@ class MainInterface implements ControlP5Interface{
        .setSize(30)
        ;
     
-    int xoff=270;
-    int xlen=(width-2*xoff);
-    int yoff=130;
-    int ylen=40;
-    int ypad=20;
+    final int buttonxoff=270;
+    final int buttonyoff=130;
+    final int buttonylen=40;
+    final int buttonypad=20;
     
     for(int i=0;i<buttonNames.size();i++)
     {
       cp5.addButton(buttonNames.get(i))
-       .setPosition(xoff,yoff+(ylen+ypad)*i)
-       .setSize(xlen,ylen)
+       .setPosition(buttonxoff,buttonyoff+(buttonylen+buttonypad)*i)
+       .setSize(width-2*buttonxoff,buttonylen)
        .setValue(0)
        .updateSize()
        .setId(i);

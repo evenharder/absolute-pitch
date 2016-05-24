@@ -9,7 +9,7 @@ HelpInterface helpInterface;
 QuizInterface quizInterface;
 
 void setup() {
-  size(700,400);
+  size(700,500);
   
   Constant.setChordList();
   
