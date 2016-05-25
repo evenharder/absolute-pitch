@@ -9,8 +9,12 @@ class QuizInterface implements ControlP5Interface{
   Minim minim;
   int level=0;
   int count=0;
-  Textarea TrialArea;
-  Textarea LevelArea;
+  Textarea trialArea;
+  Textarea levelArea;
+  
+  Button playButton;
+  Button backButton;
+  ArrayList<Button> chordButton=new ArrayList<Button>();
   
   QuizManager quizManager;
   
@@ -23,7 +27,7 @@ class QuizInterface implements ControlP5Interface{
     setGUI();
   }
   
-  void prepareGUI(){
+  private void prepareGUI(){
     buttonNames=new ArrayList<String>(Constant.CHORD_LIST);
     buttonFont = new ControlFont(createFont("Noto Sans",20,true));
     buttonColor=new CColor().setBackground(color(64,128,255))
@@ -31,7 +35,7 @@ class QuizInterface implements ControlP5Interface{
        .setActive(color(255,255,0));
   }
   
-  int setButtonId(int num)
+  private int setButtonId(int num)
   {
     if(num<4) return 10+num;
     else if(num<6) return 20+num;
@@ -39,7 +43,7 @@ class QuizInterface implements ControlP5Interface{
     else return 40+num;
   }
   
-  Button createButton(String buttonName, int xoff, int yoff, int xlen, int ylen, int id, int fontSize)
+  private Button createButton(String buttonName, int xoff, int yoff, int xlen, int ylen, int id, int fontSize)
   {
     Button button=cp5.addButton(buttonName)
        .setPosition(xoff, yoff)
@@ -59,7 +63,7 @@ class QuizInterface implements ControlP5Interface{
     return button;
   }
   
-  Textarea createTextarea(String areaName, int xoff, int yoff, int xlen, int ylen, int id, int fontSize, String basicString)
+  private Textarea createTextarea(String areaName, int xoff, int yoff, int xlen, int ylen, int id, int fontSize, String basicString)
   {
     Textarea textarea=cp5.addTextarea(areaName)
        .setPosition(xoff,yoff)
@@ -75,23 +79,23 @@ class QuizInterface implements ControlP5Interface{
     return textarea;
   }
   
-  void setGUI(){
+  private void setGUI(){
     
-    LevelArea=createTextarea("Level", 550, 10, 150, 30, 2, 20, "Level : 0");
-    TrialArea=createTextarea("Trial", 550, 40, 150, 30, 3, 20, "Trial : 0");
+    levelArea=createTextarea("Level", 550, 10, 150, 30, 2, 20, "Level : 0");
+    trialArea=createTextarea("Trial", 550, 40, 150, 30, 3, 20, "Trial : 0");
 
     final int playButtonxoff=250;
     final int playButtonyoff=100;
     final int playButtonylen=50;
     
-    createButton(playButtonName, playButtonxoff, playButtonyoff, width-2*playButtonxoff, playButtonylen, 0, 24);
+    playButton=createButton(playButtonName, playButtonxoff, playButtonyoff, width-2*playButtonxoff, playButtonylen, 0, 24);
     
     final int backButtonxoff=20;
     final int backButtonyoff=430;
     final int backButtonxlen=60;
     final int backButtonylen=50;
     
-    createButton(backButtonName, backButtonxoff, backButtonyoff, backButtonxlen, backButtonylen, 1, 24);
+    backButton=createButton(backButtonName, backButtonxoff, backButtonyoff, backButtonxlen, backButtonylen, 1, 24);
     
     final int chordButtonxoff=155;
     final int chordButtonyoff=200;
@@ -104,8 +108,9 @@ class QuizInterface implements ControlP5Interface{
     {
       for(int j=0;j<2;j++)
       {
-        createButton(buttonNames.get(2*i+j), chordButtonxoff+j*(chordButtonxlen+chordButtonxpad), chordButtonyoff+i*(chordButtonylen+chordButtonypad), 
+        Button chordBtn=createButton(buttonNames.get(2*i+j), chordButtonxoff+j*(chordButtonxlen+chordButtonxpad), chordButtonyoff+i*(chordButtonylen+chordButtonypad), 
         chordButtonxlen, chordButtonylen, 10+i*10+j, 16);
+        chordButton.add(chordBtn);
       }
     }
   }
@@ -130,7 +135,17 @@ class QuizInterface implements ControlP5Interface{
     level=0;
     count=0;
     setTextareaText();
+    quizManager.stopChord();
     quizManager.init();
+  }
+ 
+  public void terminateQuiz()
+  {
+    for(Button b : chordButton)
+    {
+      b.hide();
+    }
+    playButton.hide();
   }
   
   public void enableButtons(){
@@ -162,11 +177,13 @@ class QuizInterface implements ControlP5Interface{
       {
         level++;
         enableButtons();
-        quizManager.stopChord();
+        if(level==50)
+        {
+          terminateQuiz();
+        }
       }
       else
       {
-        //cp5.getController(e.getController().getName()).setColorForeground(92);
         cp5.getController(e.getController().getName()).hide();
       }
       count++;
@@ -177,7 +194,7 @@ class QuizInterface implements ControlP5Interface{
   
   private void setTextareaText()
   {
-    LevelArea.setText("Level : "+level);
-    TrialArea.setText("Trial : "+count);
+    levelArea.setText("Level : "+level);
+    trialArea.setText("Trial : "+count);
   }
 }

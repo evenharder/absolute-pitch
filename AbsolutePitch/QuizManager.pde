@@ -30,6 +30,7 @@ class QuizManager{
     if(str.equals(chord.getChordQuality()))
     {
       updateChordList(level+1);
+      stopChord();
       createQuiz();
       return true;
     }
