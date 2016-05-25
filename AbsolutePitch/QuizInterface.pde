@@ -129,6 +129,7 @@ class QuizInterface implements ControlP5Interface{
     }
     level=0;
     count=0;
+    setTextareaText();
     quizManager.init();
   }
   
@@ -170,8 +171,13 @@ class QuizInterface implements ControlP5Interface{
       }
       count++;
       
-      LevelArea.setText("Level : "+level);
-      TrialArea.setText("Trial : "+count);
+      setTextareaText();
     }
-  }  
+  }
+  
+  private void setTextareaText()
+  {
+    LevelArea.setText("Level : "+level);
+    TrialArea.setText("Trial : "+count);
+  }
 }

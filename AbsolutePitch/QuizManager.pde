@@ -10,14 +10,12 @@ class QuizManager{
     chordQualityList=new ArrayList<String>();
     chordQualityList.add(Constant.CHORD_MAJOR_TRIAD);
     chordQualityList.add(Constant.CHORD_MINOR_TRIAD);
+    createQuiz();  
   }
   
   QuizManager(Minim minim){
     pitchFileManager=new PitchFileManager(minim);
-    
     init();
-    
-    createQuiz();
   }
   
   private void createQuiz(){
