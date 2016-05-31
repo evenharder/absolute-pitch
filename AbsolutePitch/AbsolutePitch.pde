@@ -83,6 +83,10 @@ void update()
   {
     if(PREV_CONTROLP5!=null) getInterface(PREV_CONTROLP5).disableControlP5();
     getInterface(CURRENT_CONTROLP5).enableControlP5();
+    if(! CURRENT_CONTROLP5.equals(PREV_CONTROLP5) && CURRENT_CONTROLP5.equals(Constant.QUIZ_INTERFACE))
+    {
+       quizInterface.startQuiz();
+    }
     PREV_CONTROLP5=new String(CURRENT_CONTROLP5);
   }
 }

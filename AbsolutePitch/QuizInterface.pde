@@ -138,7 +138,6 @@ class QuizInterface implements ControlP5Interface{
     count=0;
     setTextareaText();
     quizManager.stopChord();
-    
   }
   
   public void startQuiz()
