@@ -4,13 +4,14 @@ class QuizManager{
   private int trial;
   private ArrayList<String> chordQualityList;
   private PitchFileManager pitchFileManager;
+  public ChordLevelManager chordLevelManager;
   
   void init()
   {
     chordQualityList=new ArrayList<String>();
-    chordQualityList.add(Constant.CHORD_MAJOR_TRIAD);
-    chordQualityList.add(Constant.CHORD_MINOR_TRIAD);
-    createQuiz();  
+    chordLevelManager=new ChordLevelManager(Constant.CHORD_LEVEL);
+    updateChordList(0);
+    createQuiz();
   }
   
   QuizManager(Minim minim){
@@ -49,21 +50,10 @@ class QuizManager{
   
   void updateChordList(int level)
   {
-    if(level==10){
-      chordQualityList.add(Constant.CHORD_AUGMENTED_TRIAD);
-      chordQualityList.add(Constant.CHORD_DIMINISHED_TRIAD);
-    }
-    else if(level==20){
-      chordQualityList.add(Constant.CHORD_MAJOR_7TH);
-      chordQualityList.add(Constant.CHORD_MINOR_7TH);
-    }
-    else if(level==30){
-      chordQualityList.add(Constant.CHORD_DOMINANT_7TH);
-      chordQualityList.add(Constant.CHORD_DIMINISHED_7TH);
-    }
-    else if(level==40){
-      chordQualityList.add(Constant.CHORD_HALF_DIMINISHED_7TH);
-      chordQualityList.add(Constant.CHORD_AUGMENTED_7TH);
+    for(int i=0;i<chordLevelManager.chordLevel.size();i++){
+      if(chordLevelManager.chordLevel.get(i)==level){
+        chordQualityList.add(chordLevelManager.chordList.get(i));
+      }
     }
   }
   

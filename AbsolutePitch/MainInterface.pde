@@ -116,7 +116,7 @@ class MainInterface implements ControlP5Interface{
     if(e.getController().getName().equals(quizButtonName))
     {
       AbsolutePitch.PREV_CONTROLP5=Constant.MAIN_INTERFACE;
-      AbsolutePitch.CURRENT_CONTROLP5=Constant.QUIZ_INTERFACE;
+      AbsolutePitch.CURRENT_CONTROLP5=Constant.MODE_INTERFACE;
     }
   }  
 }

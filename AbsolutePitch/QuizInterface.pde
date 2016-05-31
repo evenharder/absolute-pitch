@@ -16,6 +16,7 @@ class QuizInterface implements ControlP5Interface{
   Button backButton;
   ArrayList<Button> chordButton=new ArrayList<Button>();
   
+  
   QuizManager quizManager;
   
   QuizInterface(ControlP5 cp5, Minim minim)
@@ -126,6 +127,7 @@ class QuizInterface implements ControlP5Interface{
     }
   }
   
+  
   public void disableControlP5()
   {
     for(ControllerInterface<?> controller : cp5.getAll())
@@ -136,9 +138,14 @@ class QuizInterface implements ControlP5Interface{
     count=0;
     setTextareaText();
     quizManager.stopChord();
+    
+  }
+  
+  public void startQuiz()
+  {
     quizManager.init();
   }
- 
+  
   public void terminateQuiz()
   {
     for(Button b : chordButton)
@@ -170,8 +177,7 @@ class QuizInterface implements ControlP5Interface{
     {
       quizManager.playChord();
     }
-    else
-    {
+    else{
       boolean isCorrect=quizManager.checkAnswer(e.getController().getName(), level);
       if(isCorrect)
       {

@@ -7,6 +7,7 @@ static String CURRENT_CONTROLP5=Constant.MAIN_INTERFACE;
 MainInterface mainInterface;
 HelpInterface helpInterface;
 QuizInterface quizInterface;
+ModeInterface modeInterface;
 
 void setup() {
   size(700,500);
@@ -18,6 +19,7 @@ void setup() {
   mainInterface=new MainInterface(new ControlP5(this));
   helpInterface=new HelpInterface(new ControlP5(this));
   quizInterface=new QuizInterface(new ControlP5(this), minim);
+  modeInterface=new ModeInterface(new ControlP5(this));
   
   /*
   AudioPlayer p1=minim.loadFile("Stage Grand "+45+".mp3");
@@ -58,6 +60,7 @@ void setup() {
   mainInterface.enableControlP5();
   helpInterface.disableControlP5();
   quizInterface.disableControlP5();
+  modeInterface.disableControlP5();
 }
 
 void draw(){
@@ -70,6 +73,7 @@ ControlP5Interface getInterface(String str)
   if(str.equals(Constant.MAIN_INTERFACE)) return mainInterface;
   else if(str.equals(Constant.HELP_INTERFACE)) return helpInterface;
   else if(str.equals(Constant.QUIZ_INTERFACE)) return quizInterface;
+  else if(str.equals(Constant.MODE_INTERFACE)) return modeInterface;
   else return null;
 }
 
@@ -85,16 +89,20 @@ void update()
 
 public void controlEvent(ControlEvent e)
 {
-  if(CURRENT_CONTROLP5==Constant.MAIN_INTERFACE)
+  if(Constant.MAIN_INTERFACE.equals(CURRENT_CONTROLP5))
   {
     if(mainInterface!=null) mainInterface.controlEvent(e);
   }
-  else if(CURRENT_CONTROLP5==Constant.HELP_INTERFACE)
+  else if(Constant.HELP_INTERFACE.equals(CURRENT_CONTROLP5))
   {
     if(helpInterface!=null) helpInterface.controlEvent(e);
   }
-  else if(CURRENT_CONTROLP5==Constant.QUIZ_INTERFACE)
+  else if(Constant.QUIZ_INTERFACE.equals(CURRENT_CONTROLP5))
   {
     if(quizInterface!=null) quizInterface.controlEvent(e);
+  }
+  else if(Constant.MODE_INTERFACE.equals(CURRENT_CONTROLP5))
+  {
+    if(modeInterface!=null) modeInterface.controlEvent(e);
   }
 }

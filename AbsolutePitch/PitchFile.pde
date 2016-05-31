@@ -32,7 +32,6 @@ class PitchFile{
     return retPitchName;
   }
   
-  
   private void setPitchName(){ 
     switch(this.pitchNum%12)
     {

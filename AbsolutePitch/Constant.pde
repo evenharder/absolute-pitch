@@ -3,6 +3,7 @@ static final class Constant{
   static final String KEY_INTERFACE="KEY_INTERFACE";
   static final String QUIZ_INTERFACE="QUIZ_INTERFACE";
   static final String HELP_INTERFACE="HELP_INTERFACE";
+  static final String MODE_INTERFACE="MODE_INTERFACE";
   
   static final String MODE_FLAT="FLAT";
   static final String MODE_SHARP="SHARP";
@@ -18,6 +19,13 @@ static final class Constant{
   static final String CHORD_DIMINISHED_7TH="diminished 7th";
   static final String CHORD_HALF_DIMINISHED_7TH="half-diminished 7th";
   static final String CHORD_AUGMENTED_7TH="augmented 7th";
+  
+  static final String CHORD_LEVEL_1="Level 1";//major, minor triads
+  static final String CHORD_LEVEL_2="Level 2";//+ augmented, diminished triads
+  static final String CHORD_LEVEL_3="Level 3";//+ major, minor 7th
+  static final String CHORD_LEVEL_4="Level 4";//all
+  
+  static String CHORD_LEVEL=CHORD_LEVEL_4;
   
   static final int PITCH_AMOUNT=88;
   
