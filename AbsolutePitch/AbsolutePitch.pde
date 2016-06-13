@@ -8,6 +8,7 @@ MainInterface mainInterface;
 HelpInterface helpInterface;
 QuizInterface quizInterface;
 ModeInterface modeInterface;
+KeyInterface keyInterface;
 
 void setup() {
   size(700,500);
@@ -20,11 +21,13 @@ void setup() {
   helpInterface=new HelpInterface(new ControlP5(this));
   quizInterface=new QuizInterface(new ControlP5(this), minim);
   modeInterface=new ModeInterface(new ControlP5(this));
+  keyInterface=new KeyInterface(new ControlP5(this));
   
   mainInterface.enableControlP5();
   helpInterface.disableControlP5();
   quizInterface.disableControlP5();
   modeInterface.disableControlP5();
+  keyInterface.disableControlP5();
 }
 
 void draw(){
@@ -38,6 +41,7 @@ ControlP5Interface getInterface(String str)
   else if(str.equals(Constant.HELP_INTERFACE)) return helpInterface;
   else if(str.equals(Constant.QUIZ_INTERFACE)) return quizInterface;
   else if(str.equals(Constant.MODE_INTERFACE)) return modeInterface;
+  else if(str.equals(Constant.KEY_INTERFACE)) return keyInterface;
   else return null;
 }
 
@@ -72,5 +76,9 @@ public void controlEvent(ControlEvent e)
   else if(Constant.MODE_INTERFACE.equals(CURRENT_CONTROLP5))
   {
     if(modeInterface!=null) modeInterface.controlEvent(e);
+  }
+  else if(Constant.KEY_INTERFACE.equals(CURRENT_CONTROLP5))
+  {
+    if(modeInterface!=null) keyInterface.controlEvent(e);
   }
 }
