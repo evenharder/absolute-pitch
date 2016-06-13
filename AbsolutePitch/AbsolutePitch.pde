@@ -21,42 +21,6 @@ void setup() {
   quizInterface=new QuizInterface(new ControlP5(this), minim);
   modeInterface=new ModeInterface(new ControlP5(this));
   
-  /*
-  AudioPlayer p1=minim.loadFile("Stage Grand "+45+".mp3");
-  p1.play();
-  
-  AudioPlayer p2=minim.loadFile("Stage Grand "+49+".mp3");
-  p2.play();
-  
-  AudioPlayer p3=minim.loadFile("Stage Grand "+52+".mp3");
-  p3.play();
-  
-  /*
-  String filePath=dataPath("Stage Grand "+45+".mp3");
-  SoundFile s1=new SoundFile(this, filePath);
-  s1.play();
-  s1.amp(0.3);
-  
-  String filePath2=dataPath("Stage Grand "+49+".mp3");
-  SoundFile s2=new SoundFile(this, filePath2);
-  s2.play();
-  s2.amp(0.3);
-  
-  String filePath3=dataPath("Stage Grand "+52+".mp3");
-  SoundFile s3=new SoundFile(this, filePath3);
-  s3.play();
-  s3.amp(0.3);
-  */
-  /*
-  ArrayList<String> test=new ArrayList<String>();
-  test.add(Constant.CHORD_MAJOR_TRIAD);
-  Chord chord=new Chord(test);
-  */
-  /*
-  chord.printData();
-  pitchFileManager.playChord(chord);
-  */
-  
   mainInterface.enableControlP5();
   helpInterface.disableControlP5();
   quizInterface.disableControlP5();
@@ -85,7 +49,7 @@ void update()
     getInterface(CURRENT_CONTROLP5).enableControlP5();
     if(! CURRENT_CONTROLP5.equals(PREV_CONTROLP5) && CURRENT_CONTROLP5.equals(Constant.QUIZ_INTERFACE))
     {
-       quizInterface.startQuiz();
+      quizInterface.startQuiz();
     }
     PREV_CONTROLP5=new String(CURRENT_CONTROLP5);
   }
