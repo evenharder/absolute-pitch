@@ -9,6 +9,7 @@ HelpInterface helpInterface;
 QuizInterface quizInterface;
 ModeInterface modeInterface;
 KeyInterface keyInterface;
+PitchFileManager pitchFileManager;
 
 void setup() {
 	size(700,500);
@@ -17,9 +18,11 @@ void setup() {
 
 	Minim minim=new Minim(this);
 
+	pitchFileManager=new PitchFileManager(minim);
+
 	mainInterface=new MainInterface(new ControlP5(this));
 	helpInterface=new HelpInterface(new ControlP5(this));
-	quizInterface=new QuizInterface(new ControlP5(this), minim);
+	quizInterface=new QuizInterface(new ControlP5(this), minim, pitchFileManager);
 	modeInterface=new ModeInterface(new ControlP5(this));
 	keyInterface=new KeyInterface(new ControlP5(this));
 

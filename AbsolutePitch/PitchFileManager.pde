@@ -1,4 +1,5 @@
 class PitchFileManager{
+
 	PitchFile pitch[]=new PitchFile[Constant.PITCH_AMOUNT+1];
 	PitchFileManager(Minim minim)
 	{
