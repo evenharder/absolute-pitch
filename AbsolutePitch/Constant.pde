@@ -30,6 +30,7 @@ static final class Constant{
 	static final int PITCH_AMOUNT=88;
 
 	static final ArrayList<String> CHORD_LIST=new ArrayList<String>();
+
 	static void setChordList()
 	{
 		if(CHORD_LIST.size()==0)
@@ -46,5 +47,30 @@ static final class Constant{
 			CHORD_LIST.add(CHORD_HALF_DIMINISHED_7TH);
 			CHORD_LIST.add(CHORD_AUGMENTED_7TH);
 		}
+	}
+
+	static final ArrayList<String> PITCH_LIST=new ArrayList<String>();
+
+	static void setPitchList()
+	{
+		if(PITCH_LIST.size()==0)
+		{
+			PITCH_LIST.add("A flat");//0
+			PITCH_LIST.add("A");
+			PITCH_LIST.add("B flat");
+			PITCH_LIST.add("B");
+			PITCH_LIST.add("C");
+			PITCH_LIST.add("D flat");
+			PITCH_LIST.add("D");
+			PITCH_LIST.add("E flat");
+			PITCH_LIST.add("E");
+			PITCH_LIST.add("F");
+			PITCH_LIST.add("G flat");
+			PITCH_LIST.add("G");
+		}
+	}
+
+	public static String getPitchName(int pitchNum){
+		return PITCH_LIST.get(pitchNum%12)+" "+Integer.toString((pitchNum+8)/12);
 	}
 }

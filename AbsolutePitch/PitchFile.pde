@@ -8,7 +8,7 @@ class PitchFile{
 	PitchFile(Minim minim, int pitchNum)
 	{
 		this.pitchNum=pitchNum;
-		setPitchName();
+		pitchName=Constant.getPitchName(pitchNum);
 		ap=minim.loadFile("Stage Grand "+pitchNum+".mp3");
 	}
 
@@ -30,49 +30,6 @@ class PitchFile{
 			retPitchName=pitchName.substring(0,2)+"sharp";
 
 		return retPitchName;
-	}
-
-	private void setPitchName(){
-		switch(this.pitchNum%12)
-		{
-			case 0:
-			pitchName="A flat";
-			break;
-			case 1:
-			pitchName="A";
-			break;
-			case 2:
-			pitchName="B flat";
-			break;
-			case 3:
-			pitchName="B";
-			break;
-			case 4:
-			pitchName="C";
-			break;
-			case 5:
-			pitchName="C sharp";
-			break;
-			//TODO root name must be converted to chords
-			case 6:
-			pitchName="D";
-			break;
-			case 7:
-			pitchName="D sharp";
-			break;
-			case 8:
-			pitchName="E";
-			break;
-			case 9:
-			pitchName="F";
-			break;
-			case 10:
-			pitchName="F sharp";
-			break;
-			case 11:
-			pitchName="G";
-			break;
-		}
 	}
 
 	void play(){
