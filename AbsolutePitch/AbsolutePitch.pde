@@ -15,6 +15,7 @@ void setup() {
 	size(700,500);
 
 	Constant.setChordList();
+	Constant.setPitchList();
 
 	Minim minim=new Minim(this);
 
@@ -22,9 +23,9 @@ void setup() {
 
 	mainInterface=new MainInterface(new ControlP5(this));
 	helpInterface=new HelpInterface(new ControlP5(this));
-	quizInterface=new QuizInterface(new ControlP5(this), minim, pitchFileManager);
+	quizInterface=new QuizInterface(new ControlP5(this), pitchFileManager);
 	modeInterface=new ModeInterface(new ControlP5(this));
-	keyInterface=new KeyInterface(new ControlP5(this));
+	keyInterface=new KeyInterface(new ControlP5(this), pitchFileManager);
 
 	mainInterface.enableControlP5();
 	helpInterface.disableControlP5();

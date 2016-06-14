@@ -19,11 +19,10 @@ class QuizInterface implements ControlP5Interface{
 
 	QuizManager quizManager;
 
-	QuizInterface(ControlP5 cp5, Minim minim, PitchFileManager pitchFileManager)
+	QuizInterface(ControlP5 cp5, PitchFileManager pitchFileManager)
 	{
 		this.cp5=cp5;
-		this.minim=minim;
-		quizManager=new QuizManager(minim, pitchFileManager);
+		quizManager=new QuizManager(pitchFileManager);
 		prepareGUI();
 		setGUI();
 	}

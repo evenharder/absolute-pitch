@@ -14,7 +14,7 @@ class QuizManager{
 		createQuiz();
 	}
 
-	QuizManager(Minim minim, PitchFileManager pitchFileManager){
+	QuizManager(PitchFileManager pitchFileManager){
 		this.pitchFileManager=pitchFileManager;
 		init();
 	}
