@@ -1,6 +1,5 @@
 static final class Constant{
 	static final String MAIN_INTERFACE="MAIN_INTERFACE";
-	static final String KEY_INTERFACE="KEY_INTERFACE";
 	static final String QUIZ_INTERFACE="QUIZ_INTERFACE";
 	static final String HELP_INTERFACE="HELP_INTERFACE";
 	static final String MODE_INTERFACE="MODE_INTERFACE";

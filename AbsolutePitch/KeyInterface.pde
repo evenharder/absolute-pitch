@@ -2,7 +2,7 @@ class KeyInterface implements ControlP5Interface{
 
 	ControlP5 cp5;
 
-	KeyInterface(Control cp5){
+	KeyInterface(ControlP5 cp5){
 		this.cp5=cp5;
 	}
 
@@ -10,10 +10,7 @@ class KeyInterface implements ControlP5Interface{
 	{
 		for(ControllerInterface<?> controller : cp5.getAll())
 		{
-			if(controller.getId()<20)
-			{
-				controller.show();
-			}
+			controller.show();
 		}
 	}
 
@@ -23,5 +20,10 @@ class KeyInterface implements ControlP5Interface{
 		{
 			controller.hide();
 		}
+	}
+
+	public void controlEvent(ControlEvent e)
+	{
+
 	}
 }
