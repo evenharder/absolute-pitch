@@ -118,5 +118,10 @@ class MainInterface implements ControlP5Interface{
 			AbsolutePitch.PREV_CONTROLP5=Constant.MAIN_INTERFACE;
 			AbsolutePitch.CURRENT_CONTROLP5=Constant.MODE_INTERFACE;
 		}
+		if(e.getController().getName().equals(keyButtonName))
+		{
+			AbsolutePitch.PREV_CONTROLP5=Constant.MAIN_INTERFACE;
+			AbsolutePitch.CURRENT_CONTROLP5=Constant.KEY_INTERFACE;
+		}
 	}
 }
