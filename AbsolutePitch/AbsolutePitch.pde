@@ -14,6 +14,10 @@ PitchFileManager pitchFileManager;
 void setup() {
 	size(700,500);
 
+	ControlFont mainFont12=new ControlFont(loadFont("NotoSans-12.vlw"));
+	ControlFont mainFont20=new ControlFont(loadFont("NotoSans-20.vlw"));
+	ControlFont mainFont30=new ControlFont(loadFont("NotoSans-30.vlw"));
+	Constant.setMainFont(mainFont12, mainFont20, mainFont30);
 	Constant.setChordList();
 	Constant.setPitchList();
 

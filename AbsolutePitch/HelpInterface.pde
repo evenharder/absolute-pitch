@@ -12,7 +12,7 @@ class HelpInterface implements ControlP5Interface
 		infoArea = cp5.addTextarea("infotext")
 		.setPosition(100,100)
 		.setSize(200,200)
-		.setFont(createFont("Noto Sans",12,true))
+		.setFont(Constant.mainFont12)
 		.setLineHeight(14)
 		.setColor(color(0))
 		.setColorBackground(color(200))

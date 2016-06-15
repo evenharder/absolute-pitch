@@ -1,4 +1,6 @@
 static final class Constant{
+	static ControlFont mainFont12, mainFont20, mainFont30;
+
 	static final String MAIN_INTERFACE="MAIN_INTERFACE";
 	static final String QUIZ_INTERFACE="QUIZ_INTERFACE";
 	static final String HELP_INTERFACE="HELP_INTERFACE";
@@ -30,6 +32,12 @@ static final class Constant{
 	static final int PITCH_AMOUNT=88;
 
 	static final ArrayList<String> CHORD_LIST=new ArrayList<String>();
+
+	static void setMainFont(ControlFont f12, ControlFont f20, ControlFont f30){
+		mainFont12=f12;
+		mainFont20=f20;
+		mainFont30=f30;
+	}
 
 	static void setChordList()
 	{

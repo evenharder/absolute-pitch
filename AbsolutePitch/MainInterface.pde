@@ -13,7 +13,6 @@ class MainInterface implements ControlP5Interface{
 	ArrayList<String> buttonNames=new ArrayList<String>();
 
 	CColor white;
-	ControlFont buttonFont;
 
 	MainInterface(ControlP5 cp5)
 	{
@@ -24,8 +23,6 @@ class MainInterface implements ControlP5Interface{
 
 	void prepareGUI()
 	{
-		buttonFont = new ControlFont(createFont("Noto Sans",20,true));
-
 		white=new CColor();
 		white.setBackground(color(255,255,255));
 
@@ -52,7 +49,7 @@ class MainInterface implements ControlP5Interface{
 
 		cp5.getController(titleLabelName)
 		.getCaptionLabel()
-		.setFont(buttonFont)
+		.setFont(Constant.mainFont30)
 		.toUpperCase(false)
 		.setSize(30)
 		;
@@ -73,7 +70,7 @@ class MainInterface implements ControlP5Interface{
 
 			cp5.getController(buttonNames.get(i))
 			.getCaptionLabel()
-			.setFont(buttonFont)
+			.setFont(Constant.mainFont20)
 			.toUpperCase(false)
 			.setSize(18)
 			;
