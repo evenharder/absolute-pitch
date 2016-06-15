@@ -17,9 +17,7 @@ void setup() {
 	ControlFont mainFont12=new ControlFont(loadFont("NotoSans-12.vlw"));
 	ControlFont mainFont20=new ControlFont(loadFont("NotoSans-20.vlw"));
 	ControlFont mainFont30=new ControlFont(loadFont("NotoSans-30.vlw"));
-	Constant.setMainFont(mainFont12, mainFont20, mainFont30);
-	Constant.setChordList();
-	Constant.setPitchList();
+	Constant.initialize(mainFont12, mainFont20, mainFont30);
 
 	Minim minim=new Minim(this);
 
@@ -89,4 +87,19 @@ public void controlEvent(ControlEvent e)
 	{
 		if(modeInterface!=null) keyInterface.controlEvent(e);
 	}
+}
+
+void root(int n)
+{
+	keyInterface.rootListUpdate(n);
+}
+
+void quality(int n)
+{
+	keyInterface.qualityListUpdate(n);
+}
+
+void inversion(int n)
+{
+	keyInterface.inversionListUpdate(n);
 }

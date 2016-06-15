@@ -32,6 +32,16 @@ static final class Constant{
 	static final int PITCH_AMOUNT=88;
 
 	static final ArrayList<String> CHORD_LIST=new ArrayList<String>();
+	static final ArrayList<String> INVERSION_LIST_TRIAD=new ArrayList<String>();
+	static final ArrayList<String> INVERSION_LIST_SEVENTH=new ArrayList<String>();
+
+	static void initialize(ControlFont f12, ControlFont f20, ControlFont f30)
+	{
+		setMainFont(f12, f20, f30);
+		setChordList();
+		setPitchList();
+		setInversionList();
+	}
 
 	static void setMainFont(ControlFont f12, ControlFont f20, ControlFont f30){
 		mainFont12=f12;
@@ -75,6 +85,21 @@ static final class Constant{
 			PITCH_LIST.add("F");
 			PITCH_LIST.add("G flat");
 			PITCH_LIST.add("G");
+		}
+	}
+
+	static void setInversionList()
+	{
+		if(INVERSION_LIST_TRIAD.size()==0)
+		{
+			INVERSION_LIST_TRIAD.add("Root position");
+			INVERSION_LIST_TRIAD.add("First Inversion");
+			INVERSION_LIST_TRIAD.add("Second Inversion");
+
+			INVERSION_LIST_SEVENTH.add("Root position");
+			INVERSION_LIST_SEVENTH.add("First Inversion");
+			INVERSION_LIST_SEVENTH.add("Second Inversion");
+			INVERSION_LIST_SEVENTH.add("Third Inversion");
 		}
 	}
 
