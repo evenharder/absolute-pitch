@@ -48,6 +48,11 @@ class PitchFileManager{
 	//transpose
 	}
 
+	void playPitch(int pitchNum)
+	{
+		pitch[pitchNum].play();
+	}
+
 	void stopChord(Chord chord){
 		ArrayList<Integer> pitchList=chord.getPitchList();
 		for(int i : pitchList)
@@ -57,5 +62,10 @@ class PitchFileManager{
 	//set basic pitch
 	//create chord
 	//transpose
+	}
+
+	void stopPitch(int pitchNum)
+	{
+		pitch[pitchNum].pause();
 	}
 }

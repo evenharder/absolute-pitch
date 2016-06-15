@@ -9,10 +9,12 @@ class KeyInterface implements ControlP5Interface{
 	ScrollableList inversionList;
 
 	ArrayList<Button> pianoButtonList=new ArrayList<Button>();
+	Button backButton;
 
 	String rootListName="Root";
 	String qualityListName="Quality";
 	String inversionListName="Inversion";
+	String backButtonName="Back";
 
 	CColor whiteKeyColor;
 	CColor blackKeyColor;
@@ -79,10 +81,25 @@ class KeyInterface implements ControlP5Interface{
 		.toUpperCase(false)
 		.setSize(16);
 
+		backButton=cp5.addButton(backButtonName)
+		.setPosition(20,330)
+		.setSize(80,60)
+		.updateSize()
+		.setId(0)
+		.setColorCaptionLabel(0)
+		;
+
+		cp5.getController(backButtonName)
+		.getCaptionLabel()
+		.setFont(Constant.mainFont20)
+		.toUpperCase(false)
+		;
+
 		setPianoGUI();
 	}
 
-	private Button createButton(int index, int xloc, int yloc, int xlen, int ylen, CColor col)
+	private Button createButton(int index, int xloc, int yloc, int xlen, int ylen,
+		CColor col, boolean isLabelVisible)
 	{
 		Button button=cp5.addButton(Integer.toString(index))
 		.setPosition(xloc, yloc)
@@ -90,7 +107,7 @@ class KeyInterface implements ControlP5Interface{
 		.updateSize()
 		.setColor(col)
 		.setId(index)
-		.setLabelVisible(false)
+		.setLabelVisible(isLabelVisible)
 		;
 
 		return button;
@@ -106,14 +123,14 @@ class KeyInterface implements ControlP5Interface{
 		int ylen=15;
 		int ypad=10;
 
-		pianoButtonList.add(createButton(0,0,0,width,75,grayColor).lock());
+		pianoButtonList.add(createButton(0, 0, 0, width, 75, grayColor, false).lock());
 
 		int xloc=xoff;
 		int yloc=yoff;
 		for(int i=1;i<=3;i++)
 		{
 			pianoButtonList.add(createButton(index, xloc, yloc-(i%2>0 ? 0 : ylen+ypad),
-				xlen, ylen, (i%2>0 ? whiteKeyColor : blackKeyColor)));
+				xlen, ylen, (i%2>0 ? whiteKeyColor : blackKeyColor), false));
 			xloc+=(xlen+xpad)/2;
 			index++;
 		}
@@ -123,7 +140,7 @@ class KeyInterface implements ControlP5Interface{
 			for(int i=1;i<=5;i++)
 			{
 				pianoButtonList.add(createButton(index, xloc, yloc-(i%2>0 ? 0 : ylen+ypad),
-					xlen, ylen, (i%2>0 ? whiteKeyColor : blackKeyColor)));
+					xlen, ylen, (i%2>0 ? whiteKeyColor : blackKeyColor), false));
 				xloc+=(xlen+xpad)/2;
 				index++;
 			}
@@ -131,7 +148,7 @@ class KeyInterface implements ControlP5Interface{
 			for(int i=1;i<=7;i++)
 			{
 				pianoButtonList.add(createButton(index, xloc, yloc-(i%2>0 ? 0 : ylen+ypad),
-					xlen, ylen, (i%2>0 ? whiteKeyColor : blackKeyColor)));
+					xlen, ylen, (i%2>0 ? whiteKeyColor : blackKeyColor), false));
 				xloc+=(xlen+xpad)/2;
 				index++;
 			}
@@ -140,7 +157,7 @@ class KeyInterface implements ControlP5Interface{
 		for(int i=1;i<=1;i++)
 		{
 			pianoButtonList.add(createButton(index, xloc, yloc-(i%2>0 ? 0 : ylen+ypad),
-				xlen, ylen, (i%2>0 ? whiteKeyColor : blackKeyColor)));
+				xlen, ylen, (i%2>0 ? whiteKeyColor : blackKeyColor), false));
 			xloc+=(xlen+xpad)/2;
 			index++;
 		}
@@ -164,6 +181,21 @@ class KeyInterface implements ControlP5Interface{
 
 	public void controlEvent(ControlEvent e)
 	{
+		if(e.getController().getName()==backButtonName)
+		{
+			disableControlP5();
+			AbsolutePitch.PREV_CONTROLP5=Constant.KEY_INTERFACE;
+			AbsolutePitch.CURRENT_CONTROLP5=Constant.MAIN_INTERFACE;
+		}
+		else{
 
+			try {
+				int index=Integer.parseInt(e.getController().getName());
+				pitchFileManager.playPitch(index);
+			}
+			catch (NumberFormatException exception) {
+				;
+			}
+		}
 	}
 }
