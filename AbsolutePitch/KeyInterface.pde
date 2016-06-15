@@ -22,6 +22,8 @@ class KeyInterface implements ControlP5Interface{
 	CColor whiteKeyColor;
 	CColor blackKeyColor;
 	CColor grayColor;
+	CColor defaultColor;
+	CColor errorColor;
 
 	CColor listDefaultColor;
 	CColor listSelectedColor;
@@ -44,6 +46,7 @@ class KeyInterface implements ControlP5Interface{
 	}
 
 	private void prepareGUI(){
+		//default color : bg (0,45,90), fg (0,116,217), active (0,170,255)
 		whiteKeyColor=new CColor().setBackground(color(255,255,255))
 		.setForeground(color(192,192,0))
 		.setActive(color(255,0,0));
@@ -61,6 +64,12 @@ class KeyInterface implements ControlP5Interface{
 		listSelectedColor=new CColor().setBackground(color(120,188,97))
 		.setForeground(color(85,205,122))
 		.setActive(color(152,239,212));
+
+		defaultColor=new CColor().setBackground(color(0,45,90))
+		.setForeground(color(0,116,217))
+		.setActive(color(0,170,255));
+
+		errorColor=new CColor().setBackground(color(255,0,0));
 	}
 
 	private void setGUI()
@@ -91,7 +100,7 @@ class KeyInterface implements ControlP5Interface{
 		.setSize(150, 150)
 		.setBarHeight(30)
 		.setItemHeight(30)
-		.setColor(listDefaultColor)
+		//.setColor(listDefaultColor)
 		.addItems(Constant.CHORD_LIST)
 		.close();
 
@@ -106,6 +115,8 @@ class KeyInterface implements ControlP5Interface{
 		.setFont(Constant.mainFont20)
 		.toUpperCase(false)
 		.setSize(16);
+
+		println(qualityList.getItems());
 
 		inversionList=cp5.addScrollableList(inversionListName)
 		.setPosition(330, 150)
@@ -147,6 +158,8 @@ class KeyInterface implements ControlP5Interface{
 		.setSize(70,60)
 		.updateSize()
 		.setId(100)
+		.setColor(errorColor)
+		.lock()
 		.setColorCaptionLabel(0)
 		;
 
@@ -259,9 +272,6 @@ class KeyInterface implements ControlP5Interface{
 		}
 		else if(e.getController().getName().equals(playButtonName))
 		{
-			if( rootPitchString.equals("") || chordQualityString.equals("") || inversionString.equals(""))
-				return;
-
 			int pitchNum=getRootListIndex()+12*4;
 			int inversion=getInversionListIndex();
 			Chord chord=new Chord(chordQualityString, pitchNum, inversion);
@@ -310,6 +320,7 @@ class KeyInterface implements ControlP5Interface{
 		}
 		rootList.getItem(index).put("color", listSelectedColor);
 		rootPitchString=rootList.getItem(index).get("text").toString();
+		setPlayButtonState();
 	}
 
 	void qualityListUpdate(int index)
@@ -328,8 +339,9 @@ class KeyInterface implements ControlP5Interface{
 			{
 				inversionList.setItems(Constant.INVERSION_LIST_TRIAD);
 				if(invIndex==3)
-					inversionString=Constant.INVERSION_LIST_TRIAD.get(0);
-				inversionListUpdate(invIndex%3);
+					inversionString="";
+				if(0<= invIndex && invIndex<3)
+					inversionListUpdate(invIndex);
 				//TODO Issues on if Third Inversion -> triad
 				//Switching the main text is tricky
 			}
@@ -344,6 +356,7 @@ class KeyInterface implements ControlP5Interface{
 			}
 			isTriad=false;
 		}
+		setPlayButtonState();
 	}
 
 	void inversionListUpdate(int index)
@@ -355,5 +368,37 @@ class KeyInterface implements ControlP5Interface{
 		}
 		inversionList.getItem(index).put("color", listSelectedColor);
 		inversionString=inversionList.getItem(index).get("text").toString();
+		setPlayButtonState();
+	}
+
+	boolean isValidChord()
+	{
+		if(rootPitchString.equals("")) return false;
+		if(chordQualityString.equals("")) return false;
+		if(inversionString.equals("")) return false;
+
+		if(isTriad==true && getInversionListIndex()==3) return false;
+
+		int pitchNum=getRootListIndex()+12*4;
+		int inversion=getInversionListIndex();
+		Chord chord=new Chord(chordQualityString, pitchNum, inversion);
+		for(int index : chord.getPitchList())
+		{
+			if(index<1 || index>88) return false;
+		}
+		return true;
+	}
+
+	void setPlayButtonState()
+	{
+		if(isValidChord())
+		{
+			playButton.setColor(defaultColor);
+			playButton.unlock();
+		}
+		else{
+			playButton.setColor(errorColor);
+			playButton.lock();
+		}
 	}
 }
