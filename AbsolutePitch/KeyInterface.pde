@@ -364,6 +364,7 @@ class KeyInterface implements ControlP5Interface{
 	{
 		int prevIndex=getQualityListIndex();
 		int invIndex=getInversionListIndex();
+		println("invIndex: "+invIndex);
 		if(prevIndex!=-1)
 		{
 			qualityList.getItem(prevIndex).put("color", listDefaultColor);
@@ -375,10 +376,8 @@ class KeyInterface implements ControlP5Interface{
 			if(isTriad==false)
 			{
 				inversionList.setItems(Constant.INVERSION_LIST_TRIAD);
-				if(invIndex==3)
-					inversionString="";
 				if(0<= invIndex && invIndex<3)
-					inversionListUpdate(invIndex);
+					inversionListUpdate(getInversionListIndex());
 				//TODO Issues on if Third Inversion -> triad
 				//Switching the main text is tricky
 			}
@@ -389,7 +388,10 @@ class KeyInterface implements ControlP5Interface{
 			if(isTriad==true)
 			{
 				inversionList.setItems(Constant.INVERSION_LIST_SEVENTH);
-				inversionListUpdate(invIndex);
+				if(invIndex>=0)
+					inversionListUpdate(invIndex);
+				else if(inversionString.equals(Constant.INVERSION_LIST_SEVENTH.get(3)))
+					inversionListUpdate(3);
 			}
 			isTriad=false;
 		}
@@ -423,14 +425,17 @@ class KeyInterface implements ControlP5Interface{
 
 	boolean isValidChord()
 	{
+		if(isTriad==true && getInversionListIndex()==-1)
+		{
+			highLightChord(new ArrayList<Integer>());
+			return false;
+		}
+
 		if(rootPitchString.equals("")) return false;
 		if(chordQualityString.equals("")) return false;
 		if(inversionString.equals("")) return false;
 		if(octaveString.equals("")) return false;
 
-		if(isTriad==true && getInversionListIndex()==3) return false;
-
-		println(getOctaveListIndex());
 		int pitchNum=getRootListIndex()+12*getOctaveListIndex()-(getRootListIndex()<4 ? 0 : 12);
 		int inversion=getInversionListIndex();
 		Chord chord=new Chord(chordQualityString, pitchNum, inversion);
