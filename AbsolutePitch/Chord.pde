@@ -57,7 +57,7 @@ class Chord{
 		}
 		else if(Constant.CHORD_DOMINANT_7TH.equals(chordQuality)){
 			pitchList.add(0);
-			pitchList.add(3);
+			pitchList.add(4);
 			pitchList.add(7);
 			pitchList.add(10);
 		}
