@@ -27,7 +27,7 @@ class ModeInterface implements ControlP5Interface{
 	private void setGUI(){
 		final int titleLabelxoff=100;
 		final int titleLabelyoff=30;
-		final int titleLabelylen=60;
+		final int titleLabelylen=40;
 
 		cp5.addButton(titleLabel)
 		.setPosition(titleLabelxoff,titleLabelyoff)
@@ -45,7 +45,7 @@ class ModeInterface implements ControlP5Interface{
 		;
 
 		final int buttonxoff=270;
-		final int buttonyoff=130;
+		final int buttonyoff=100;
 		final int buttonylen=40;
 		final int buttonypad=20;
 
@@ -65,7 +65,6 @@ class ModeInterface implements ControlP5Interface{
 				.getCaptionLabel()
 				.setFont(Constant.mainFont20)
 				.toUpperCase(false)
-				.setSize(18)
 				;
 			}
 			else

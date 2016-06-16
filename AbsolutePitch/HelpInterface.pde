@@ -11,7 +11,7 @@ class HelpInterface implements ControlP5Interface
 		this.cp5=cp5;
 		infoArea = cp5.addTextarea("infotext")
 		.setPosition(100,100)
-		.setSize(500,300)
+		.setSize(500,160)
 		.setFont(Constant.mainFont12)
 		.setLineHeight(14)
 		.setColor(color(0))
@@ -31,7 +31,7 @@ class HelpInterface implements ControlP5Interface
 			);
 
 		cp5.addButton(backButtonName)
-		.setPosition(320,430)
+		.setPosition(320,300)
 		.setSize(60,40)
 		.updateSize()
 		.setColor(Constant.defaultButtonColor)
