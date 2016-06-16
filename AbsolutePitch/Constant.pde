@@ -43,6 +43,7 @@ static final class Constant{
 		setChordList();
 		setPitchList();
 		setInversionList();
+		setOctaveList();
 	}
 
 	private static void setMainFont(ControlFont f12, ControlFont f20, ControlFont f30){

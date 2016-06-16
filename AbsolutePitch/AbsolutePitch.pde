@@ -103,3 +103,8 @@ void inversion(int n)
 {
 	keyInterface.inversionListUpdate(n);
 }
+
+void octave(int n)
+{
+	keyInterface.octaveListUpdate(n);
+}

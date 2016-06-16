@@ -8,6 +8,7 @@ class KeyInterface implements ControlP5Interface{
 	ScrollableList rootList;
 	ScrollableList qualityList;
 	ScrollableList inversionList;
+	ScrollableList octaveList;
 
 	ArrayList<Button> pianoButtonList=new ArrayList<Button>();
 	Button backButton;
@@ -16,6 +17,8 @@ class KeyInterface implements ControlP5Interface{
 	String rootListName="root";
 	String qualityListName="quality";
 	String inversionListName="inversion";
+	String octaveListName="octave";
+
 	String backButtonName="Back";
 	String playButtonName="Play";
 
@@ -24,19 +27,23 @@ class KeyInterface implements ControlP5Interface{
 	CColor grayColor;
 	CColor defaultColor;
 	CColor errorColor;
+	CColor keyHighlightColor;
 
 	CColor listDefaultColor;
 	CColor listSelectedColor;
 
 	ArrayList<Integer> prevPressed=new ArrayList<Integer>();
+	ArrayList<Integer> curKeyHighlight=new ArrayList<Integer>();
 
 	PitchFileManager pitchFileManager;
 
 	String rootPitchString="";
 	String chordQualityString="";
 	String inversionString="";
+	String octaveString="";
 
 	boolean isTriad=true;
+	boolean isWhiteKey[]=new boolean[89];
 
 	KeyInterface(ControlP5 cp5, PitchFileManager pitchFileManager){
 		this.cp5=cp5;
@@ -69,7 +76,9 @@ class KeyInterface implements ControlP5Interface{
 		.setForeground(color(0,116,217))
 		.setActive(color(0,170,255));
 
-		errorColor=new CColor().setBackground(color(255,0,0));
+		errorColor=new CColor().setBackground(color(32,32,32));
+
+		keyHighlightColor=new CColor().setBackground(color(0,255,192));
 	}
 
 	private void setGUI()
@@ -96,7 +105,7 @@ class KeyInterface implements ControlP5Interface{
 		.setSize(16);
 
 		qualityList=cp5.addScrollableList(qualityListName)
-		.setPosition(150, 150)
+		.setPosition(130, 150)
 		.setSize(150, 150)
 		.setBarHeight(30)
 		.setItemHeight(30)
@@ -119,7 +128,7 @@ class KeyInterface implements ControlP5Interface{
 		println(qualityList.getItems());
 
 		inversionList=cp5.addScrollableList(inversionListName)
-		.setPosition(330, 150)
+		.setPosition(300, 150)
 		.setSize(150, 150)
 		.setBarHeight(30)
 		.setItemHeight(30)
@@ -139,23 +148,44 @@ class KeyInterface implements ControlP5Interface{
 		.toUpperCase(false)
 		.setSize(16);
 
+		octaveList=cp5.addScrollableList(octaveListName)
+		.setPosition(470, 150)
+		.setSize(60, 150)
+		.setBarHeight(30)
+		.setItemHeight(30)
+		.setColor(listDefaultColor)
+		.addItems(Constant.OCTAVE_LIST)
+		.close();
+
+		cp5.getController(octaveListName)
+		.getCaptionLabel()
+		.setFont(Constant.mainFont20)
+		.toUpperCase(false)
+		.setSize(16);
+
+		cp5.getController(octaveListName)
+		.getValueLabel()
+		.setFont(Constant.mainFont20)
+		.toUpperCase(false)
+		.setSize(16);
+
 		backButton=cp5.addButton(backButtonName)
 		.setPosition(20,330)
-		.setSize(80,60)
+		.setSize(70,30)
 		.updateSize()
 		.setId(0)
-		.setColorCaptionLabel(0)
 		;
 
 		cp5.getController(backButtonName)
 		.getCaptionLabel()
+		.setColor(255)
 		.setFont(Constant.mainFont20)
 		.toUpperCase(false)
 		;
 
 		playButton=cp5.addButton(playButtonName)
 		.setPosition(600,150)
-		.setSize(70,60)
+		.setSize(70,30)
 		.updateSize()
 		.setId(100)
 		.setColor(errorColor)
@@ -165,6 +195,7 @@ class KeyInterface implements ControlP5Interface{
 
 		cp5.getController(playButtonName)
 		.getCaptionLabel()
+		.setColor(255)
 		.setFont(Constant.mainFont20)
 		.toUpperCase(false)
 		;
@@ -203,6 +234,7 @@ class KeyInterface implements ControlP5Interface{
 		int yloc=yoff;
 		for(int i=1;i<=3;i++)
 		{
+			isWhiteKey[index]=i%2>0;
 			pianoButtonList.add(createButton(index, xloc, yloc-(i%2>0 ? 0 : ylen+ypad),
 				xlen, ylen, (i%2>0 ? whiteKeyColor : blackKeyColor), false));
 			xloc+=(xlen+xpad)/2;
@@ -213,6 +245,7 @@ class KeyInterface implements ControlP5Interface{
 		{
 			for(int i=1;i<=5;i++)
 			{
+				isWhiteKey[index]=i%2>0;
 				pianoButtonList.add(createButton(index, xloc, yloc-(i%2>0 ? 0 : ylen+ypad),
 					xlen, ylen, (i%2>0 ? whiteKeyColor : blackKeyColor), false));
 				xloc+=(xlen+xpad)/2;
@@ -221,6 +254,7 @@ class KeyInterface implements ControlP5Interface{
 			xloc+=(xlen+xpad)/2;
 			for(int i=1;i<=7;i++)
 			{
+				isWhiteKey[index]=i%2>0;
 				pianoButtonList.add(createButton(index, xloc, yloc-(i%2>0 ? 0 : ylen+ypad),
 					xlen, ylen, (i%2>0 ? whiteKeyColor : blackKeyColor), false));
 				xloc+=(xlen+xpad)/2;
@@ -230,6 +264,7 @@ class KeyInterface implements ControlP5Interface{
 		}
 		for(int i=1;i<=1;i++)
 		{
+			isWhiteKey[index]=i%2>0;
 			pianoButtonList.add(createButton(index, xloc, yloc-(i%2>0 ? 0 : ylen+ypad),
 				xlen, ylen, (i%2>0 ? whiteKeyColor : blackKeyColor), false));
 			xloc+=(xlen+xpad)/2;
@@ -272,7 +307,7 @@ class KeyInterface implements ControlP5Interface{
 		}
 		else if(e.getController().getName().equals(playButtonName))
 		{
-			int pitchNum=getRootListIndex()+12*4;
+			int pitchNum=getRootListIndex()+12*getOctaveListIndex()-(getRootListIndex()<4 ? 0 : 12);
 			int inversion=getInversionListIndex();
 			Chord chord=new Chord(chordQualityString, pitchNum, inversion);
 			for(int index : chord.getPitchList())
@@ -311,6 +346,12 @@ class KeyInterface implements ControlP5Interface{
 		else
 			return Constant.INVERSION_LIST_SEVENTH.indexOf(inversionString);
 	}
+
+	int getOctaveListIndex()
+	{
+		return octaveString.equals("") ? -1 : Integer.parseInt(octaveString);
+	}
+
 	void rootListUpdate(int index)
 	{
 		int prevIndex=getRootListIndex();
@@ -371,22 +412,66 @@ class KeyInterface implements ControlP5Interface{
 		setPlayButtonState();
 	}
 
+	void octaveListUpdate(int index)
+	{
+		int prevIndex=getOctaveListIndex();
+		if(prevIndex!=-1)
+		{
+			octaveList.getItem(prevIndex).put("color", listDefaultColor);
+		}
+		octaveList.getItem(index).put("color", listSelectedColor);
+		octaveString=octaveList.getItem(index).get("text").toString();
+		println("octaveString: "+octaveString);
+		setPlayButtonState();
+	}
+
 	boolean isValidChord()
 	{
 		if(rootPitchString.equals("")) return false;
 		if(chordQualityString.equals("")) return false;
 		if(inversionString.equals("")) return false;
+		if(octaveString.equals("")) return false;
 
 		if(isTriad==true && getInversionListIndex()==3) return false;
 
-		int pitchNum=getRootListIndex()+12*4;
+		println(getOctaveListIndex());
+		int pitchNum=getRootListIndex()+12*getOctaveListIndex()-(getRootListIndex()<4 ? 0 : 12);
 		int inversion=getInversionListIndex();
 		Chord chord=new Chord(chordQualityString, pitchNum, inversion);
+
+		highLightChord(chord.getPitchList());
+
 		for(int index : chord.getPitchList())
 		{
 			if(index<1 || index>88) return false;
 		}
 		return true;
+	}
+
+	void highLightChord(ArrayList<Integer> pitchList)
+	{
+		for(int index : curKeyHighlight)
+		{
+			if(1<=index && index<=88)
+			{
+				if(isWhiteKey[index])
+				{
+					pianoButtonList.get(index).setColor(whiteKeyColor);
+				}
+				else{
+					pianoButtonList.get(index).setColor(blackKeyColor);
+				}
+			}
+		}
+		curKeyHighlight.clear();
+		for(int index : pitchList)
+		{
+			if(1<=index && index<=88)
+			{
+				pianoButtonList.get(index).setColorBackground(color(0,255,192));
+				curKeyHighlight.add(index);
+			}
+		}
 	}
 
 	void setPlayButtonState()
