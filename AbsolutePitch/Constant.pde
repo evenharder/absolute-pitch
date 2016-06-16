@@ -37,13 +37,21 @@ static final class Constant{
 	static final ArrayList<String> PITCH_LIST=new ArrayList<String>();
 	static final ArrayList<String> OCTAVE_LIST=new ArrayList<String>();
 
-	static void initialize(ControlFont f12, ControlFont f20, ControlFont f30)
+	static CColor defaultButtonColor=new CColor();
+
+	static void initialize(ControlFont f12, ControlFont f20, ControlFont f30, CColor ccolor)
 	{
+		setDefaultButtonColor(ccolor);
 		setMainFont(f12, f20, f30);
 		setChordList();
 		setPitchList();
 		setInversionList();
 		setOctaveList();
+	}
+
+	private static void setDefaultButtonColor(CColor ccolor)
+	{
+		defaultButtonColor=ccolor;
 	}
 
 	private static void setMainFont(ControlFont f12, ControlFont f20, ControlFont f30){

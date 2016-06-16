@@ -17,7 +17,10 @@ void setup() {
 	ControlFont mainFont12=new ControlFont(loadFont("NotoSans-12.vlw"));
 	ControlFont mainFont20=new ControlFont(loadFont("NotoSans-20.vlw"));
 	ControlFont mainFont30=new ControlFont(loadFont("NotoSans-30.vlw"));
-	Constant.initialize(mainFont12, mainFont20, mainFont30);
+	Constant.initialize(mainFont12, mainFont20, mainFont30,
+		new CColor().setBackground(color(64,128,255))
+		.setForeground(color(0,224,180))
+		.setActive(color(255,255,0)));
 
 	Minim minim=new Minim(this);
 
