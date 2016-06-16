@@ -10,6 +10,7 @@ class QuizInterface implements ControlP5Interface{
 	int level=0;
 	int count=0;
 
+	Textarea difficultyArea;
 	Textarea trialArea;
 	Textarea levelArea;
 	Textarea resultArea;
@@ -81,27 +82,28 @@ class QuizInterface implements ControlP5Interface{
 
 	private void setGUI(){
 
-		levelArea=createTextarea("Level", 550, 10, 150, 30, 2, 20, "Level : 0");
-		trialArea=createTextarea("Trial", 550, 40, 150, 30, 3, 20, "Trial : 0");
+		difficultyArea=createTextarea("Difficulty", 590, 20, 100, 30, 1, 20, "["+Constant.CHORD_LEVEL+"]");
+		levelArea=createTextarea("Level", 561, 50, 150, 30, 2, 20, "Quiz No. : 0");
+		trialArea=createTextarea("Trial", 600, 80, 150, 30, 3, 20, "Trial : 0");
 		resultArea=createTextarea("Result", 100, 200, 500, 300, 100, 20, "").hide();
 
 		final int playButtonxoff=250;
-		final int playButtonyoff=100;
-		final int playButtonylen=50;
+		final int playButtonyoff=40;
+		final int playButtonylen=40;
 
 		playButton=createButton(playButtonName, playButtonxoff, playButtonyoff, width-2*playButtonxoff, playButtonylen, 0, 20);
 
 		final int backButtonxoff=10;
-		final int backButtonyoff=430;
+		final int backButtonyoff=40;
 		final int backButtonxlen=80;
-		final int backButtonylen=50;
+		final int backButtonylen=40;
 
 		backButton=createButton(backButtonName, backButtonxoff, backButtonyoff, backButtonxlen, backButtonylen, 1, 20);
 
 		final int chordButtonxoff=155;
-		final int chordButtonyoff=200;
+		final int chordButtonyoff=100;
 		final int chordButtonxpad=20;
-		final int chordButtonypad=10;
+		final int chordButtonypad=20;
 		final int chordButtonxlen=(width-2*chordButtonxoff-chordButtonxpad)/2;
 		final int chordButtonylen=40;
 
@@ -141,6 +143,7 @@ class QuizInterface implements ControlP5Interface{
 
 	public void startQuiz()
 	{
+		difficultyArea.setText("["+Constant.CHORD_LEVEL+"]");
 		quizManager.init();
 	}
 
@@ -164,7 +167,12 @@ class QuizInterface implements ControlP5Interface{
 			resultString="You managed to solve all the quizs very well.\n"+
 			"Fabulous!";
 		}
-		else if(count<90){
+		else if(Constant.CHORD_LEVEL.equals("1") && count<70){
+			resultString="You completed this set with a decent accuracy.\n"+
+			"Great job!";
+		}
+		else if(!Constant.CHORD_LEVEL.equals("1") && count<90)
+		{
 			resultString="You completed this set with a decent accuracy.\n"+
 			"Great job!";
 		}
@@ -225,7 +233,7 @@ class QuizInterface implements ControlP5Interface{
 
 	private void setTextareaText()
 	{
-		levelArea.setText("Level : "+level);
+		levelArea.setText("Quiz No. : "+level);
 		trialArea.setText("Trial : "+count);
 	}
 }
