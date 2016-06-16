@@ -21,10 +21,6 @@ class ModeInterface implements ControlP5Interface{
 		buttonNames.add(Constant.CHORD_LEVEL_3);
 		buttonNames.add(Constant.CHORD_LEVEL_4);
 
-		buttonFont = new ControlFont(createFont("Noto Sans",20,true));
-		buttonColor=new CColor().setBackground(color(64,128,255))
-		.setForeground(color(0,255,255))
-		.setActive(color(255,255,0));
 		whiteColor=new CColor().setBackground(color(255,255,255));
 	}
 
@@ -44,9 +40,8 @@ class ModeInterface implements ControlP5Interface{
 
 		cp5.getController(titleLabel)
 		.getCaptionLabel()
-		.setFont(buttonFont)
+		.setFont(Constant.mainFont30)
 		.toUpperCase(false)
-		.setSize(30)
 		;
 
 		final int buttonxoff=270;
@@ -62,12 +57,13 @@ class ModeInterface implements ControlP5Interface{
 				.setPosition(buttonxoff,buttonyoff+(buttonylen+buttonypad)*i)
 				.setSize(width-2*buttonxoff,buttonylen)
 				.setValue(0)
+				.setColor(Constant.defaultButtonColor)
 				.updateSize()
 				.setId(i);
 
 				cp5.getController(buttonNames.get(i))
 				.getCaptionLabel()
-				.setFont(buttonFont)
+				.setFont(Constant.mainFont20)
 				.toUpperCase(false)
 				.setSize(18)
 				;
@@ -78,12 +74,13 @@ class ModeInterface implements ControlP5Interface{
 				.setPosition(buttonxoff,buttonyoff+(buttonylen+buttonypad)*i)
 				.setSize(width-2*buttonxoff,buttonylen)
 				.setValue(0)
+				.setColor(Constant.defaultButtonColor)
 				.updateSize()
 				.setId(i);
 
 				cp5.getController(backButtonName)
 				.getCaptionLabel()
-				.setFont(buttonFont)
+				.setFont(Constant.mainFont20)
 				.toUpperCase(false)
 				.setSize(18)
 				;

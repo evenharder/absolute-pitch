@@ -66,13 +66,13 @@ class MainInterface implements ControlP5Interface{
 			.setSize(width-2*buttonxoff,buttonylen)
 			.setValue(0)
 			.updateSize()
+			.setColor(Constant.defaultButtonColor)
 			.setId(i);
 
 			cp5.getController(buttonNames.get(i))
 			.getCaptionLabel()
 			.setFont(Constant.mainFont20)
 			.toUpperCase(false)
-			.setSize(18)
 			;
 		}
 	}

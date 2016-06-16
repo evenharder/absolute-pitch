@@ -55,11 +55,11 @@ class KeyInterface implements ControlP5Interface{
 	private void prepareGUI(){
 		//default color : bg (0,45,90), fg (0,116,217), active (0,170,255)
 		whiteKeyColor=new CColor().setBackground(color(255,255,255))
-		.setForeground(color(192,192,0))
+		.setForeground(color(192,255,0))
 		.setActive(color(255,0,0));
 
 		blackKeyColor=new CColor().setBackground(color(0,0,0))
-		.setForeground(color(192,192,0))
+		.setForeground(color(192,255,0))
 		.setActive(color(255,0,0));
 
 		grayColor=new CColor().setBackground(color(127,127,127));
@@ -68,13 +68,9 @@ class KeyInterface implements ControlP5Interface{
 		.setForeground(color(0,173,231))
 		.setActive(color(152,239,212));
 
-		listSelectedColor=new CColor().setBackground(color(120,188,97))
+		listSelectedColor=new CColor().setBackground(color(120,210,60))
 		.setForeground(color(85,205,122))
 		.setActive(color(152,239,212));
-
-		defaultColor=new CColor().setBackground(color(0,45,90))
-		.setForeground(color(0,116,217))
-		.setActive(color(0,170,255));
 
 		errorColor=new CColor().setBackground(color(32,32,32));
 
@@ -125,8 +121,6 @@ class KeyInterface implements ControlP5Interface{
 		.toUpperCase(false)
 		.setSize(16);
 
-		println(qualityList.getItems());
-
 		inversionList=cp5.addScrollableList(inversionListName)
 		.setPosition(300, 150)
 		.setSize(150, 150)
@@ -169,31 +163,33 @@ class KeyInterface implements ControlP5Interface{
 		.toUpperCase(false)
 		.setSize(16);
 
-		backButton=cp5.addButton(backButtonName)
-		.setPosition(20,330)
-		.setSize(70,30)
-		.updateSize()
-		.setId(0)
-		;
-
-		cp5.getController(backButtonName)
-		.getCaptionLabel()
-		.setColor(255)
-		.setFont(Constant.mainFont20)
-		.toUpperCase(false)
-		;
-
 		playButton=cp5.addButton(playButtonName)
 		.setPosition(600,150)
 		.setSize(70,30)
 		.updateSize()
 		.setId(100)
+		.setColor(Constant.defaultButtonColor)
 		.setColor(errorColor)
 		.lock()
 		.setColorCaptionLabel(0)
 		;
 
 		cp5.getController(playButtonName)
+		.getCaptionLabel()
+		.setColor(255)
+		.setFont(Constant.mainFont20)
+		.toUpperCase(false)
+		;
+
+		backButton=cp5.addButton(backButtonName)
+		.setPosition(600,210)
+		.setSize(70,30)
+		.setColor(Constant.defaultButtonColor)
+		.updateSize()
+		.setId(0)
+		;
+
+		cp5.getController(backButtonName)
 		.getCaptionLabel()
 		.setColor(255)
 		.setFont(Constant.mainFont20)
@@ -478,7 +474,7 @@ class KeyInterface implements ControlP5Interface{
 	{
 		if(isValidChord())
 		{
-			playButton.setColor(defaultColor);
+			playButton.setColor(Constant.defaultButtonColor);
 			playButton.unlock();
 		}
 		else{

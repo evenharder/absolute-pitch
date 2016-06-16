@@ -1,20 +1,22 @@
 class QuizInterface implements ControlP5Interface{
 
 	ControlP5 cp5;
+
 	ArrayList<String> buttonNames;
-	ControlFont buttonFont;
-	CColor buttonColor;
+
 	String playButtonName="Play chord";
 	String backButtonName="Back";
-	Minim minim;
+
 	int level=0;
 	int count=0;
+
 	Textarea trialArea;
 	Textarea levelArea;
 	Textarea resultArea;
 
 	Button playButton;
 	Button backButton;
+
 	ArrayList<Button> chordButton=new ArrayList<Button>();
 
 	QuizManager quizManager;
@@ -29,10 +31,6 @@ class QuizInterface implements ControlP5Interface{
 
 	private void prepareGUI(){
 		buttonNames=new ArrayList<String>(Constant.CHORD_LIST);
-		buttonFont = new ControlFont(createFont("Noto Sans",20,true));
-		buttonColor=new CColor().setBackground(color(64,128,255))
-		.setForeground(color(0,255,255))
-		.setActive(color(255,255,0));
 	}
 
 	private int setButtonId(int num)
@@ -49,14 +47,15 @@ class QuizInterface implements ControlP5Interface{
 		.setPosition(xoff, yoff)
 		.setSize(xlen, ylen)
 		.updateSize()
-		.setColor(buttonColor)
+		.setColor(Constant.defaultButtonColor)
 		.setColorCaptionLabel(0)
 		.setId(id);
 		;
 
 		cp5.getController(buttonName)
 		.getCaptionLabel()
-		.setFont(buttonFont)
+		.setColor(255)
+		.setFont(Constant.mainFont20)
 		.toUpperCase(false)
 		.setSize(fontSize)
 		;
@@ -68,12 +67,13 @@ class QuizInterface implements ControlP5Interface{
 		Textarea textarea=cp5.addTextarea(areaName)
 		.setPosition(xoff,yoff)
 		.setSize(xlen,ylen)
-		.setFont(createFont("Noto Sans",fontSize))
+		.setFont(Constant.mainFont20)
 		.setLineHeight(fontSize*6/5)
 		.setColor(color(128))
 		.setColorBackground(color(255,100))
 		.setColorForeground(color(255,100))
 		.setId(id)
+		.hideScrollbar()
 		.setText(basicString)
 		;
 		return textarea;
@@ -89,14 +89,14 @@ class QuizInterface implements ControlP5Interface{
 		final int playButtonyoff=100;
 		final int playButtonylen=50;
 
-		playButton=createButton(playButtonName, playButtonxoff, playButtonyoff, width-2*playButtonxoff, playButtonylen, 0, 24);
+		playButton=createButton(playButtonName, playButtonxoff, playButtonyoff, width-2*playButtonxoff, playButtonylen, 0, 20);
 
 		final int backButtonxoff=10;
 		final int backButtonyoff=430;
 		final int backButtonxlen=80;
 		final int backButtonylen=50;
 
-		backButton=createButton(backButtonName, backButtonxoff, backButtonyoff, backButtonxlen, backButtonylen, 1, 24);
+		backButton=createButton(backButtonName, backButtonxoff, backButtonyoff, backButtonxlen, backButtonylen, 1, 20);
 
 		final int chordButtonxoff=155;
 		final int chordButtonyoff=200;
@@ -110,7 +110,7 @@ class QuizInterface implements ControlP5Interface{
 			for(int j=0;j<2;j++)
 			{
 				Button chordBtn=createButton(buttonNames.get(2*i+j), chordButtonxoff+j*(chordButtonxlen+chordButtonxpad), chordButtonyoff+i*(chordButtonylen+chordButtonypad),
-					chordButtonxlen, chordButtonylen, 10+i*10+j, 16);
+					chordButtonxlen, chordButtonylen, 10+i*10+j, 18);
 				chordButton.add(chordBtn);
 			}
 		}
