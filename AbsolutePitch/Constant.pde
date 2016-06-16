@@ -34,8 +34,6 @@ static final class Constant{
 	static final ArrayList<String> CHORD_LIST=new ArrayList<String>();
 	static final ArrayList<String> INVERSION_LIST_TRIAD=new ArrayList<String>();
 	static final ArrayList<String> INVERSION_LIST_SEVENTH=new ArrayList<String>();
-	static final ArrayList<String> PITCH_LIST=new ArrayList<String>();
-	static final ArrayList<String> OCTAVE_LIST=new ArrayList<String>();
 
 	static void initialize(ControlFont f12, ControlFont f20, ControlFont f30)
 	{
@@ -45,13 +43,13 @@ static final class Constant{
 		setInversionList();
 	}
 
-	private static void setMainFont(ControlFont f12, ControlFont f20, ControlFont f30){
+	static void setMainFont(ControlFont f12, ControlFont f20, ControlFont f30){
 		mainFont12=f12;
 		mainFont20=f20;
 		mainFont30=f30;
 	}
 
-	private static void setChordList()
+	static void setChordList()
 	{
 		if(CHORD_LIST.size()==0)
 		{
@@ -69,7 +67,9 @@ static final class Constant{
 		}
 	}
 
-	private static void setPitchList()
+	static final ArrayList<String> PITCH_LIST=new ArrayList<String>();
+
+	static void setPitchList()
 	{
 		if(PITCH_LIST.size()==0)
 		{
@@ -88,7 +88,7 @@ static final class Constant{
 		}
 	}
 
-	private static void setInversionList()
+	static void setInversionList()
 	{
 		if(INVERSION_LIST_TRIAD.size()==0)
 		{
@@ -100,17 +100,6 @@ static final class Constant{
 			INVERSION_LIST_SEVENTH.add("First Inversion");
 			INVERSION_LIST_SEVENTH.add("Second Inversion");
 			INVERSION_LIST_SEVENTH.add("Third Inversion");
-		}
-	}
-
-	private static void setOctaveList()
-	{
-		if(OCTAVE_LIST.size()==0)
-		{
-			for(int i=0;i<=8;i++)
-			{
-				OCTAVE_LIST.add(Integer.toString(i));
-			}
 		}
 	}
 

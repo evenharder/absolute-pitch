@@ -8,7 +8,6 @@ class KeyInterface implements ControlP5Interface{
 	ScrollableList rootList;
 	ScrollableList qualityList;
 	ScrollableList inversionList;
-	ScrollableList octaveList;
 
 	ArrayList<Button> pianoButtonList=new ArrayList<Button>();
 	Button backButton;
@@ -17,8 +16,6 @@ class KeyInterface implements ControlP5Interface{
 	String rootListName="root";
 	String qualityListName="quality";
 	String inversionListName="inversion";
-	String octaveListName="octave";
-
 	String backButtonName="Back";
 	String playButtonName="Play";
 
@@ -38,7 +35,6 @@ class KeyInterface implements ControlP5Interface{
 	String rootPitchString="";
 	String chordQualityString="";
 	String inversionString="";
-	String octaveString="";
 
 	boolean isTriad=true;
 
@@ -73,7 +69,7 @@ class KeyInterface implements ControlP5Interface{
 		.setForeground(color(0,116,217))
 		.setActive(color(0,170,255));
 
-		errorColor=new CColor().setBackground(color(32,32,32));
+		errorColor=new CColor().setBackground(color(255,0,0));
 	}
 
 	private void setGUI()
@@ -100,7 +96,7 @@ class KeyInterface implements ControlP5Interface{
 		.setSize(16);
 
 		qualityList=cp5.addScrollableList(qualityListName)
-		.setPosition(130, 150)
+		.setPosition(150, 150)
 		.setSize(150, 150)
 		.setBarHeight(30)
 		.setItemHeight(30)
@@ -123,7 +119,7 @@ class KeyInterface implements ControlP5Interface{
 		println(qualityList.getItems());
 
 		inversionList=cp5.addScrollableList(inversionListName)
-		.setPosition(300, 150)
+		.setPosition(330, 150)
 		.setSize(150, 150)
 		.setBarHeight(30)
 		.setItemHeight(30)
@@ -143,53 +139,32 @@ class KeyInterface implements ControlP5Interface{
 		.toUpperCase(false)
 		.setSize(16);
 
-		octaveList=cp5.addScrollableList(octaveListName)
-		.setPosition(470, 150)
-		.setSize(60, 150)
-		.setBarHeight(30)
-		.setItemHeight(30)
-		.setColor(listDefaultColor)
-		.addItems(Constant.INVERSION_LIST_TRIAD)
-		.close();
-
-		cp5.getController(octaveListName)
-		.getCaptionLabel()
-		.setFont(Constant.mainFont20)
-		.toUpperCase(false)
-		.setSize(16);
-
-		cp5.getController(octaveListName)
-		.getValueLabel()
-		.setFont(Constant.mainFont20)
-		.toUpperCase(false)
-		.setSize(16);
-
 		backButton=cp5.addButton(backButtonName)
 		.setPosition(20,330)
-		.setSize(70,30)
+		.setSize(80,60)
 		.updateSize()
 		.setId(0)
+		.setColorCaptionLabel(0)
 		;
 
 		cp5.getController(backButtonName)
 		.getCaptionLabel()
-		.setColor(255)
 		.setFont(Constant.mainFont20)
 		.toUpperCase(false)
 		;
 
 		playButton=cp5.addButton(playButtonName)
 		.setPosition(600,150)
-		.setSize(70,30)
+		.setSize(70,60)
 		.updateSize()
 		.setId(100)
 		.setColor(errorColor)
 		.lock()
+		.setColorCaptionLabel(0)
 		;
 
 		cp5.getController(playButtonName)
 		.getCaptionLabel()
-		.setColor(255)
 		.setFont(Constant.mainFont20)
 		.toUpperCase(false)
 		;
@@ -336,12 +311,6 @@ class KeyInterface implements ControlP5Interface{
 		else
 			return Constant.INVERSION_LIST_SEVENTH.indexOf(inversionString);
 	}
-
-	int getOctaveListIndex()
-	{
-		return octaveListName.equals("") ? -1 : Integer.parseInt(octaveListName);
-	}
-
 	void rootListUpdate(int index)
 	{
 		int prevIndex=getRootListIndex();
@@ -402,28 +371,15 @@ class KeyInterface implements ControlP5Interface{
 		setPlayButtonState();
 	}
 
-	void octaveListUpdate(int index)
-	{
-		int prevIndex=getOctaveListIndex();
-		if(prevIndex!=-1)
-		{
-			octaveList.getItem(prevIndex).put("color", listDefaultColor);
-		}
-		octaveList.getItem(index).put("color", listSelectedColor);
-		octaveString=inversionList.getItem(index).get("text").toString();
-		setPlayButtonState();
-	}
-
 	boolean isValidChord()
 	{
 		if(rootPitchString.equals("")) return false;
 		if(chordQualityString.equals("")) return false;
 		if(inversionString.equals("")) return false;
-		if(octaveListName.equals("")) return false;
 
 		if(isTriad==true && getInversionListIndex()==3) return false;
 
-		int pitchNum=getRootListIndex()+12*Integer.parseInt(octaveListName);
+		int pitchNum=getRootListIndex()+12*4;
 		int inversion=getInversionListIndex();
 		Chord chord=new Chord(chordQualityString, pitchNum, inversion);
 		for(int index : chord.getPitchList())

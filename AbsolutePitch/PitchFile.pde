@@ -10,9 +10,6 @@ class PitchFile{
 		this.pitchNum=pitchNum;
 		pitchName=Constant.getPitchName(pitchNum);
 		ap=minim.loadFile("Stage Grand "+pitchNum+".mp3");
-		/** WARNING!
-		  * where A4(440Hz) is marked as 69. Here, however, A4 is the 49th key.
-		*/
 	}
 
 	void getPitchName()
