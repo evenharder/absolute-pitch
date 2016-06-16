@@ -10,6 +10,11 @@ class PitchFile{
 		this.pitchNum=pitchNum;
 		pitchName=Constant.getPitchName(pitchNum);
 		ap=minim.loadFile("Stage Grand "+pitchNum+".mp3");
+		/** WARNING!
+		  * Please note that the pitch number does not follow the MIDI Tuning Standard
+		  * You have to add 20 to the current pitchNum to obtain the MIDI Tuning Standard Value,
+		  * where A4(440Hz) is marked as 69. Here, however, A4 is the 49th key.
+		*/
 	}
 
 	void getPitchName()
