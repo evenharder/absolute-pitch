@@ -92,7 +92,7 @@ class QuizInterface implements ControlP5Interface{
 		levelArea=createTextarea("Level", 561, 35, 150, 30, 2, 20, "Quiz No. : 0");
 		trialArea=createTextarea("Trial", 600, 65, 150, 30, 3, 20, "Trial : 0");
 		resultArea=createTextarea("Result", 100, 200, 500, 300, 100, 20, "").hide();
-		answerArea=createTextarea("Answer", 220, 390, 300, 30, 4, 12, "");
+		answerArea=createTextarea("Answer", 155, 390, 500, 30, 4, 20, "");
 
 		final int playButtonxoff=250;
 		final int playButtonyoff=25;
@@ -218,10 +218,11 @@ class QuizInterface implements ControlP5Interface{
 			quizManager.playChord();
 		}
 		else{
+			String answerText=quizManager.getData()
 			boolean isCorrect=quizManager.checkAnswer(e.getController().getName(), level);
 			if(isCorrect)
 			{
-				answerArea.setText(quizManager.getData());
+				answerArea.setText(answerText);
 				println(answerArea.getText());
 				level++;
 				enableButtons();
