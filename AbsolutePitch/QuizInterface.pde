@@ -218,7 +218,7 @@ class QuizInterface implements ControlP5Interface{
 			quizManager.playChord();
 		}
 		else{
-			String answerText=quizManager.getData()
+			String answerText=quizManager.getData();
 			boolean isCorrect=quizManager.checkAnswer(e.getController().getName(), level);
 			if(isCorrect)
 			{
