@@ -161,7 +161,7 @@ class KeyInterface implements ControlP5Interface{
 		.hideScrollbar()
 		;
 
-		setDataText();
+		setDataText(false);
 		setPianoGUI();
 	}
 
