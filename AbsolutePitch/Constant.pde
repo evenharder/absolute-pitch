@@ -101,14 +101,14 @@ static final class Constant{
 	{
 		if(INVERSION_LIST_TRIAD.size()==0)
 		{
-			INVERSION_LIST_TRIAD.add("Root position");
-			INVERSION_LIST_TRIAD.add("First Inversion");
-			INVERSION_LIST_TRIAD.add("Second Inversion");
+			INVERSION_LIST_TRIAD.add("root position");
+			INVERSION_LIST_TRIAD.add("first inversion");
+			INVERSION_LIST_TRIAD.add("second inversion");
 
-			INVERSION_LIST_SEVENTH.add("Root position");
-			INVERSION_LIST_SEVENTH.add("First Inversion");
-			INVERSION_LIST_SEVENTH.add("Second Inversion");
-			INVERSION_LIST_SEVENTH.add("Third Inversion");
+			INVERSION_LIST_SEVENTH.add("root position");
+			INVERSION_LIST_SEVENTH.add("first inversion");
+			INVERSION_LIST_SEVENTH.add("second inversion");
+			INVERSION_LIST_SEVENTH.add("third inversion");
 		}
 	}
 
