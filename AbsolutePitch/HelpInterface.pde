@@ -19,16 +19,17 @@ class HelpInterface implements ControlP5Interface
 		.setColorForeground(color(200));
 		;
 
-		infoArea.setText("Lorem Ipsum is simply dummy text of the printing and typesetting"
-			+" industry. Lorem Ipsum has been the industry's standard dummy text"
-			+" ever since the 1500s, when an unknown printer took a galley of type"
-			+" and scrambled it to make a type specimen book. It has survived not"
-			+" only five centuries, but also the leap into electronic typesetting,"
-			+" remaining essentially unchanged. It was popularised in the 1960s"
-			+" with the release of Letraset sheets containing Lorem Ipsum passages,"
-			+" and more recently with desktop publishing software like Aldus"
-			+" PageMaker including versions of Lorem Ipsum."
-			);
+		StringBuffer infoText = new StringBuffer();
+
+		String lines[] = loadStrings("instruction.txt");
+
+		for(int i=0;i<lines.length;i++)
+		{
+			infoText.append(lines[i]);
+			infoText.append("\n");
+		}
+
+		infoArea.setText(infoText.toString());
 
 		cp5.addButton(backButtonName)
 		.setPosition(320,300)

@@ -1,0 +1,30 @@
+Project Absolute Pitch : Revision 1
+
+Programmed by Sangheon Lee(evenharder)
+
+This program basically deals with musical chords.
+
+--- Preliminaries ---
+
+If you do not know the musical terminology used in this program well, you'd better study the basic concepts first. After then, you should listen a lot of chords to fully understand by ear. The more you hear the chords, the more you are get used to it.
+
+--- Introduction ---
+
+The main interface consists of four buttons.
+
+- Key Interface
+- Quiz Interface
+- Help
+- Exit
+
+'Key Interface' contains a piano roll made of 88 buttons, four scrollable lists and two buttons. Each piano buttons represent a real 88 piano by playing the corresponding pitch when pressed. By altering the sliders (root, quality, inversion, octave), you can create a chord you want and play if it is valid. The chord is vaild if and only if the following conditions hold:
+
+- the root is selected
+- the quality is selected
+- the inversion is selected
+- the octave is selected
+- when the quality is a triad, its inversion must not be a third inversion
+- the constructed chord must be playable by piano
+
+The play button is activated when the constructed chord is valid, and it can be observed by the color of the button. The button is gray if it is invalid, otherwise it is blue.
+
