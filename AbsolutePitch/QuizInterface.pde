@@ -14,6 +14,7 @@ class QuizInterface implements ControlP5Interface{
 	Textarea trialArea;
 	Textarea levelArea;
 	Textarea resultArea;
+	Textarea answerArea;
 
 	Button playButton;
 	Button backButton;
@@ -68,7 +69,6 @@ class QuizInterface implements ControlP5Interface{
 		Textarea textarea=cp5.addTextarea(areaName)
 		.setPosition(xoff,yoff)
 		.setSize(xlen,ylen)
-		.setFont(Constant.mainFont20)
 		.setLineHeight(fontSize*6/5)
 		.setColor(color(128))
 		.setColorBackground(color(255,100))
@@ -77,31 +77,38 @@ class QuizInterface implements ControlP5Interface{
 		.hideScrollbar()
 		.setText(basicString)
 		;
+
+		if(fontSize==12)
+			textarea.setFont(Constant.mainFont12);
+		else
+			textarea.setFont(Constant.mainFont20);
+
 		return textarea;
 	}
 
 	private void setGUI(){
 
-		difficultyArea=createTextarea("Difficulty", 590, 20, 100, 30, 1, 20, "["+Constant.CHORD_LEVEL+"]");
-		levelArea=createTextarea("Level", 561, 50, 150, 30, 2, 20, "Quiz No. : 0");
-		trialArea=createTextarea("Trial", 600, 80, 150, 30, 3, 20, "Trial : 0");
+		difficultyArea=createTextarea("Difficulty", 590, 5, 100, 30, 1, 20, "["+Constant.CHORD_LEVEL+"]");
+		levelArea=createTextarea("Level", 561, 35, 150, 30, 2, 20, "Quiz No. : 0");
+		trialArea=createTextarea("Trial", 600, 65, 150, 30, 3, 20, "Trial : 0");
 		resultArea=createTextarea("Result", 100, 200, 500, 300, 100, 20, "").hide();
+		answerArea=createTextarea("Answer", 220, 390, 300, 30, 4, 12, "");
 
 		final int playButtonxoff=250;
-		final int playButtonyoff=40;
+		final int playButtonyoff=25;
 		final int playButtonylen=40;
 
 		playButton=createButton(playButtonName, playButtonxoff, playButtonyoff, width-2*playButtonxoff, playButtonylen, 0, 20);
 
 		final int backButtonxoff=10;
-		final int backButtonyoff=40;
+		final int backButtonyoff=25;
 		final int backButtonxlen=80;
 		final int backButtonylen=40;
 
 		backButton=createButton(backButtonName, backButtonxoff, backButtonyoff, backButtonxlen, backButtonylen, 1, 20);
 
 		final int chordButtonxoff=155;
-		final int chordButtonyoff=100;
+		final int chordButtonyoff=85;
 		final int chordButtonxpad=20;
 		final int chordButtonypad=20;
 		final int chordButtonxlen=(width-2*chordButtonxoff-chordButtonxpad)/2;
@@ -137,6 +144,7 @@ class QuizInterface implements ControlP5Interface{
 		}
 		level=0;
 		count=0;
+		answerArea.setText("");
 		setTextareaText();
 		quizManager.stopChord();
 	}
@@ -213,6 +221,8 @@ class QuizInterface implements ControlP5Interface{
 			boolean isCorrect=quizManager.checkAnswer(e.getController().getName(), level);
 			if(isCorrect)
 			{
+				answerArea.setText(quizManager.getData());
+				println(answerArea.getText());
 				level++;
 				enableButtons();
 				if(level==50)

@@ -61,4 +61,9 @@ class QuizManager{
 	{
 		return new ArrayList<String>(chordQualityList);
 	}
+
+	public String getData()
+	{
+		return "Previous chord : "+chord.getData();
+	}
 }

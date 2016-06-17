@@ -115,15 +115,18 @@ class Chord{
 		for(int i : realPitchList)
 			print(i+" ");
 		println("");
-		printData();
 		return realPitchList;
 	}
 
-	void printData()
+	String getData()
 	{
-		String str=chordQuality+":"+rootPitch+":"+inversion;
-		println(str);
+		StringBuffer sb=new StringBuffer();
+		sb.append(Constant.PITCH_LIST.get(rootPitch%12));
+		if(sb.toString().length()>=2)
+			sb.append(" ");
+		sb.append(Integer.toString((rootPitch+8)/12)+", ");
+		sb.append(chordQuality+", ");
+		sb.append(Constant.INVERSION_LIST_SEVENTH.get(inversion));
+		return sb.toString();
 	}
-	//TODO create various chords
-	//TODO pitch -> chord (consider the key signatures, quite tricky!)
 }
