@@ -10,6 +10,8 @@ class KeyInterface implements ControlP5Interface{
 	ScrollableList inversionList;
 	ScrollableList octaveList;
 
+	Textarea dataArea;
+
 	ArrayList<Button> pianoButtonList=new ArrayList<Button>();
 	Button backButton;
 	Button playButton;
@@ -18,6 +20,8 @@ class KeyInterface implements ControlP5Interface{
 	String qualityListName="quality";
 	String inversionListName="inversion";
 	String octaveListName="octave";
+
+	String dataAreaName="data";
 
 	String backButtonName="Back";
 	String playButtonName="Play";
@@ -76,92 +80,42 @@ class KeyInterface implements ControlP5Interface{
 
 		keyHighlightColor=new CColor().setBackground(color(0,255,192));
 	}
+	private ScrollableList createScrollableList(String name, int xloc, int yloc,
+		int xlen, int ylen, int barHeight, int fontSize, ArrayList<String> list)
+	{
+		ScrollableList scrollableList=cp5.addScrollableList(name)
+		.setPosition(xloc, yloc)
+		.setSize(xlen, ylen)
+		.setBarHeight(barHeight)
+		.setItemHeight(barHeight)
+		.setColor(listDefaultColor)
+		.addItems(list)
+		.close();
 
+		cp5.getController(name)
+		.getCaptionLabel()
+		.setFont(Constant.mainFont20)
+		.toUpperCase(false)
+		.setSize(fontSize);
+
+		cp5.getController(name)
+		.getValueLabel()
+		.setFont(Constant.mainFont20)
+		.toUpperCase(false)
+		.setSize(fontSize);
+
+		return scrollableList;
+	}
 	private void setGUI()
 	{
-		rootList=cp5.addScrollableList(rootListName)
-		.setPosition(50, 150)
-		.setSize(60, 150)
-		.setBarHeight(30)
-		.setItemHeight(30)
-		.setColor(listDefaultColor)
-		.addItems(Constant.PITCH_LIST)
-		.close();
-
-		cp5.getController(rootListName)
-		.getCaptionLabel()
-		.setFont(Constant.mainFont20)
-		.toUpperCase(false)
-		.setSize(16);
-
-		cp5.getController(rootListName)
-		.getValueLabel()
-		.setFont(Constant.mainFont20)
-		.toUpperCase(false)
-		.setSize(16);
-
-		qualityList=cp5.addScrollableList(qualityListName)
-		.setPosition(130, 150)
-		.setSize(150, 150)
-		.setBarHeight(30)
-		.setItemHeight(30)
-		//.setColor(listDefaultColor)
-		.addItems(Constant.CHORD_LIST)
-		.close();
-
-		cp5.getController(qualityListName)
-		.getCaptionLabel()
-		.setFont(Constant.mainFont20)
-		.toUpperCase(false)
-		.setSize(16);
-
-		cp5.getController(qualityListName)
-		.getValueLabel()
-		.setFont(Constant.mainFont20)
-		.toUpperCase(false)
-		.setSize(16);
-
-		inversionList=cp5.addScrollableList(inversionListName)
-		.setPosition(300, 150)
-		.setSize(150, 150)
-		.setBarHeight(30)
-		.setItemHeight(30)
-		.setColor(listDefaultColor)
-		.addItems(Constant.INVERSION_LIST_TRIAD)
-		.close();
-
-		cp5.getController(inversionListName)
-		.getCaptionLabel()
-		.setFont(Constant.mainFont20)
-		.toUpperCase(false)
-		.setSize(16);
-
-		cp5.getController(inversionListName)
-		.getValueLabel()
-		.setFont(Constant.mainFont20)
-		.toUpperCase(false)
-		.setSize(16);
-
-		octaveList=cp5.addScrollableList(octaveListName)
-		.setPosition(470, 150)
-		.setSize(60, 150)
-		.setBarHeight(30)
-		.setItemHeight(30)
-		.setColor(listDefaultColor)
-		.addItems(Constant.OCTAVE_LIST)
-		.close();
-
-		cp5.getController(octaveListName)
-		.getCaptionLabel()
-		.setFont(Constant.mainFont20)
-		.toUpperCase(false)
-		.setSize(16);
-
-		cp5.getController(octaveListName)
-		.getValueLabel()
-		.setFont(Constant.mainFont20)
-		.toUpperCase(false)
-		.setSize(16);
+		rootList=createScrollableList(rootListName, 50, 150, 60, 150, 30, 16,
+		 Constant.PITCH_LIST);
+		qualityList=createScrollableList(qualityListName, 130, 150, 150, 150, 30, 16,
+			Constant.CHORD_LIST);
+		inversionList=createScrollableList(inversionListName, 300, 150, 150, 150, 30, 16,
+			Constant.INVERSION_LIST_TRIAD);
+		octaveList=createScrollableList(octaveListName, 470, 150, 60, 150, 30, 16,
+			Constant.OCTAVE_LIST);
 
 		playButton=cp5.addButton(playButtonName)
 		.setPosition(600,150)
@@ -196,6 +150,18 @@ class KeyInterface implements ControlP5Interface{
 		.toUpperCase(false)
 		;
 
+		dataArea=cp5.addTextarea(dataAreaName)
+		.setPosition(100,350)
+		.setSize(500,50)
+		.setFont(Constant.mainFont20)
+		.setLineHeight(24)
+		.setColor(color(128))
+		.setColorBackground(color(255,100))
+		.setColorForeground(color(255,100))
+		.hideScrollbar()
+		;
+
+		setDataText();
 		setPianoGUI();
 	}
 
@@ -486,5 +452,33 @@ class KeyInterface implements ControlP5Interface{
 			playButton.setColor(errorColor);
 			playButton.lock();
 		}
+		setDataText(!playButton.isLock());
+	}
+
+	void setDataText(boolean isValid)
+	{
+		StringBuffer sb=new StringBuffer("Current chord : ");
+		if(isValid)
+		{
+			boolean isPrevExists=false;
+			for(int i : curKeyHighlight)
+			{
+				if(isPrevExists)
+					sb.append(", ");
+				int rootNum=i%12;
+				int octaveNum=(i+8)/12;
+				String rootStr=Constant.PITCH_LIST.get(rootNum);
+				sb.append(rootStr);
+				if(rootStr.length()>=2)
+					sb.append(" ");
+				sb.append(Integer.toString(octaveNum));
+				isPrevExists=true;
+			}
+		}
+		else
+		{
+			sb.append("invalid configuration");
+		}
+		dataArea.setText(sb.toString());
 	}
 }
