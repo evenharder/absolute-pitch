@@ -114,7 +114,7 @@ class KeyInterface implements ControlP5Interface{
 			Constant.CHORD_LIST);
 		inversionList=createScrollableList(inversionListName, 300, 150, 150, 150, 30, 16,
 			Constant.INVERSION_LIST_TRIAD);
-		octaveList=createScrollableList(octaveListName, 470, 150, 60, 150, 30, 16,
+		octaveList=createScrollableList(octaveListName, 470, 150, 70, 150, 30, 16,
 			Constant.OCTAVE_LIST);
 
 		playButton=cp5.addButton(playButtonName)
@@ -151,7 +151,7 @@ class KeyInterface implements ControlP5Interface{
 		;
 
 		dataArea=cp5.addTextarea(dataAreaName)
-		.setPosition(100,350)
+		.setPosition(145,350)
 		.setSize(500,50)
 		.setFont(Constant.mainFont20)
 		.setLineHeight(24)
