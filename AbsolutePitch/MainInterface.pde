@@ -100,7 +100,8 @@ class MainInterface implements ControlP5Interface{
 
 	public void controlEvent(ControlEvent e)
 	{
-		println(e.getController().getName());
+		if(Constant.isDebugMode)
+			println(this.getClass()+" : "+e.getController().getName());
 		if(e.getController().getName().equals(exitButtonName))
 		{
 			exit();

@@ -1,4 +1,7 @@
 static final class Constant{
+
+	static boolean isDebugMode=false;
+
 	static ControlFont mainFont16, mainFont20, mainFont30;
 
 	static final String MAIN_INTERFACE="MAIN_INTERFACE";

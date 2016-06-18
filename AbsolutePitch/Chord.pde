@@ -112,9 +112,14 @@ class Chord{
 			index++;
 			index%=pitchList.size();
 		}
-		for(int i : realPitchList)
-			print(i+" ");
-		println("");
+		if(Constant.isDebugMode)
+		{
+			print(this.getClass()+" ");
+			for(int i : realPitchList)
+				print(i+" ");
+			println("");
+		}
+
 		return realPitchList;
 	}
 

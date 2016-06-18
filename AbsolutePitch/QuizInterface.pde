@@ -208,7 +208,8 @@ class QuizInterface implements ControlP5Interface{
 
 	public void controlEvent(ControlEvent e)
 	{
-		println(e.getController().getName());
+		if(Constant.isDebugMode)
+			println(this.getClass()+" : "+e.getController().getName());
 		if(e.getController().getName()==backButtonName)
 		{
 			AbsolutePitch.PREV_CONTROLP5=Constant.QUIZ_INTERFACE;
@@ -225,7 +226,8 @@ class QuizInterface implements ControlP5Interface{
 			if(isCorrect)
 			{
 				answerArea.setText(answerText);
-				println(answerArea.getText());
+				if(Constant.isDebugMode)
+					println(this.getClass()+" : "+answerArea.getText());
 				level++;
 				enableButtons();
 				quizManager.playChord();

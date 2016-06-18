@@ -255,7 +255,8 @@ class KeyInterface implements ControlP5Interface{
 
 	public void controlEvent(ControlEvent e)
 	{
-		println(e.getController().getName());
+		if(Constant.isDebugMode)
+			println(this.getClass()+" : "+e.getController().getName());
 		for(int i : prevPressed)
 		{
 			pitchFileManager.stopPitch(i);
@@ -330,7 +331,6 @@ class KeyInterface implements ControlP5Interface{
 	{
 		int prevIndex=getQualityListIndex();
 		int invIndex=getInversionListIndex();
-		println("invIndex: "+invIndex);
 		if(prevIndex!=-1)
 		{
 			qualityList.getItem(prevIndex).put("color", listDefaultColor);
@@ -385,7 +385,6 @@ class KeyInterface implements ControlP5Interface{
 		}
 		octaveList.getItem(index).put("color", listSelectedColor);
 		octaveString=octaveList.getItem(index).get("text").toString();
-		println("octaveString: "+octaveString);
 		setPlayButtonState();
 	}
 

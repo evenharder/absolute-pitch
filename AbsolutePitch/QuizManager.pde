@@ -26,8 +26,11 @@ class QuizManager{
 	boolean checkAnswer(String str, int level)
 	{
 		trial++;
-		println("Participant's answer : "+str);
-		println("Jury's answer : "+chord.getChordQuality());
+		if(Constant.isDebugMode)
+		{
+			println("Participant's answer : "+str);
+			println("Jury's answer : "+chord.getChordQuality());
+		}
 		if(str.equals(chord.getChordQuality()))
 		{
 			updateChordList(level+1);

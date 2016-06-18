@@ -68,6 +68,29 @@ void update()
 	}
 }
 
+int command_enter=0;
+void keyPressed()
+{
+	println("command_enter: "+command_enter);
+	println("key: "+key);
+	if(Constant.isDebugMode) return;
+	else if(command_enter==0 && (key=='D' || key=='d')) command_enter++;
+	else if(command_enter==1 && (key=='E' || key=='e')) command_enter++;
+	else if(command_enter==2 && (key=='B' || key=='b')) command_enter++;
+	else if(command_enter==3 && (key=='U' || key=='u')) command_enter++;
+	else if(command_enter==4 && (key=='G' || key=='g')) command_enter++;
+	else if(command_enter==5 && (key==' ')) command_enter++;
+	else if(command_enter==6 && (key=='P' || key=='p')) command_enter++;
+	else if(command_enter==7 && (key=='I' || key=='i')) command_enter++;
+	else if(command_enter==8 && (key=='T' || key=='t')) command_enter++;
+	else if(command_enter==9 && (key=='C' || key=='c')) command_enter++;
+	else if(command_enter==10 && (key=='H' || key=='h')) command_enter++;
+	else if(command_enter==11 && (key=='!')) command_enter++;
+
+	if(command_enter==12)
+		Constant.isDebugMode=true;
+}
+
 public void controlEvent(ControlEvent e)
 {
 	if(Constant.MAIN_INTERFACE.equals(CURRENT_CONTROLP5))

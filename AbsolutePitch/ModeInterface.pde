@@ -103,7 +103,8 @@ class ModeInterface implements ControlP5Interface{
 
 	public void controlEvent(ControlEvent e)
 	{
-		println(e.getController().getName());
+		if(Constant.isDebugMode)
+			println(this.getClass()+" : "+e.getController().getName());
 		if(e.getController().getName().equals(backButtonName))
 		{
 			AbsolutePitch.PREV_CONTROLP5=Constant.MODE_INTERFACE;
