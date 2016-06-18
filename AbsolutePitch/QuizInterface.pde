@@ -167,24 +167,24 @@ class QuizInterface implements ControlP5Interface{
 	private void setResultText()
 	{
 		String resultString=new String();
-		if(count==50){
+		if(count==25){
 			resultString="You achieved a full mark!\n"+
 			"Excellent!";
 		}
-		else if(count<60){
+		else if(count<30){
 			resultString="You managed to solve all the quizs very well.\n"+
 			"Fabulous!";
 		}
-		else if(Constant.CHORD_LEVEL.equals("1") && count<70){
+		else if(Constant.CHORD_LEVEL.equals("1") && count<35){
 			resultString="You completed this set with a decent accuracy.\n"+
 			"Great job!";
 		}
-		else if(!Constant.CHORD_LEVEL.equals("1") && count<90)
+		else if(!Constant.CHORD_LEVEL.equals("1") && count<45)
 		{
 			resultString="You completed this set with a decent accuracy.\n"+
 			"Great job!";
 		}
-		else if(count<150){
+		else if(count<75){
 			resultString="You finished this set with a bit of trial-and-errors.\n"+
 			"Keep up the good work!";
 		}
@@ -220,13 +220,14 @@ class QuizInterface implements ControlP5Interface{
 		else{
 			String answerText=quizManager.getData();
 			boolean isCorrect=quizManager.checkAnswer(e.getController().getName(), level);
+			count++;
 			if(isCorrect)
 			{
 				answerArea.setText(answerText);
 				println(answerArea.getText());
 				level++;
 				enableButtons();
-				if(level==50)
+				if(level==25)
 				{
 					terminateQuiz();
 					resultArea.show();
@@ -237,7 +238,6 @@ class QuizInterface implements ControlP5Interface{
 			{
 				cp5.getController(e.getController().getName()).hide();
 			}
-			count++;
 			setTextareaText();
 		}
 	}
