@@ -1,5 +1,5 @@
 static final class Constant{
-	static ControlFont mainFont12, mainFont20, mainFont30;
+	static ControlFont mainFont16, mainFont20, mainFont30;
 
 	static final String MAIN_INTERFACE="MAIN_INTERFACE";
 	static final String QUIZ_INTERFACE="QUIZ_INTERFACE";
@@ -39,10 +39,10 @@ static final class Constant{
 
 	static CColor defaultButtonColor=new CColor();
 
-	static void initialize(ControlFont f12, ControlFont f20, ControlFont f30, CColor ccolor)
+	static void initialize(ControlFont f16, ControlFont f20, ControlFont f30, CColor ccolor)
 	{
 		setDefaultButtonColor(ccolor);
-		setMainFont(f12, f20, f30);
+		setMainFont(f16, f20, f30);
 		setChordList();
 		setPitchList();
 		setInversionList();
@@ -54,8 +54,8 @@ static final class Constant{
 		defaultButtonColor=ccolor;
 	}
 
-	private static void setMainFont(ControlFont f12, ControlFont f20, ControlFont f30){
-		mainFont12=f12;
+	private static void setMainFont(ControlFont f16, ControlFont f20, ControlFont f30){
+		mainFont16=f16;
 		mainFont20=f20;
 		mainFont30=f30;
 	}

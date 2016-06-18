@@ -78,8 +78,8 @@ class QuizInterface implements ControlP5Interface{
 		.setText(basicString)
 		;
 
-		if(fontSize==12)
-			textarea.setFont(Constant.mainFont12);
+		if(fontSize==16)
+			textarea.setFont(Constant.mainFont16);
 		else
 			textarea.setFont(Constant.mainFont20);
 
