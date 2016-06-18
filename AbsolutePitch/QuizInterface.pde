@@ -153,6 +153,7 @@ class QuizInterface implements ControlP5Interface{
 	{
 		difficultyArea.setText("["+Constant.CHORD_LEVEL+"]");
 		quizManager.init();
+		quizManager.playChord();
 	}
 
 	private void terminateQuiz()
@@ -227,6 +228,7 @@ class QuizInterface implements ControlP5Interface{
 				println(answerArea.getText());
 				level++;
 				enableButtons();
+				quizManager.playChord();
 				if(level==25)
 				{
 					terminateQuiz();
