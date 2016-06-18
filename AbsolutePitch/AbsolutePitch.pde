@@ -86,7 +86,10 @@ void keyPressed()
 	else if(command_enter==11 && (key=='!')) command_enter++;
 
 	if(command_enter==12)
+	{
 		Constant.isDebugMode=true;
+		println("Debug mode activated.");
+	}
 }
 
 public void controlEvent(ControlEvent e)
