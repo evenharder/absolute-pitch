@@ -1,6 +1,13 @@
-Project Absolute Pitch : Revision 1
+Project Absolute Pitch
+
+--- Development Information ---
 
 Programmed by Sangheon Lee(evenharder)
+Program Language : Processing
+Additional Font : Google Noto Sans (https://www.google.com/get/noto/)
+Additional Libraries : controlP5 (https://github.com/sojamo/controlp5/)
+
+--- Premable ---
 
 This program basically deals with musical chords.
 
@@ -10,12 +17,16 @@ If you do not know the musical terminology used in this program well, you'd bett
 
 --- Introduction ---
 
-The main interface consists of four buttons.
+This program, 'AbsolutePitch', is a program to help people who want to understand the concepts about chords. Rather than the documenation, this interactive program may enhance the ability to perceive chord thoroughly. I hope this program is helpful!
+
+The program consists of four buttons.
 
 - Key Interface
 - Quiz Interface
 - Help
 - Exit
+
+The main goal of the 'Key Interface' is to play the chords and display them on the piano roll. Users can hear and see the chords of their own by selecting options of the chord and 88-key piano roll.
 
 'Key Interface' contains a piano roll made of 88 buttons, four scrollable lists and two buttons. Each piano buttons represent a real 88 piano by playing the corresponding pitch when pressed. By altering the sliders (root, quality, inversion, octave), you can create a chord you want and play if it is valid. The chord is vaild if and only if the following conditions hold:
 
@@ -28,3 +39,51 @@ The main interface consists of four buttons.
 
 The play button is activated when the constructed chord is valid, and it can be observed by the color of the button. The button is gray if it is invalid, otherwise it is blue.
 
+When the chord is valid, each pitch is notified as a concatenated string.
+
+The purpose of the 'Quiz Interface' is to determine the quality of a random chord. 25 questions are given, and you have to solve the quiz by selecting the corresponding quality. You can listen the chord by clicking the button.
+
+Firstly, the program askes you a 'difficulty' of a quiz set. The difficulty determines the range of the quality.
+
+- Level 1 :
+	major
+	minor
+- Level 2 :
+	major
+ 	minor
+ 	augmented(after 10 quizzes)
+ 	diminished(after 10 quizzes)
+- Level 3 :
+	major
+	minor
+	augmented(after 8 quizzes)
+	diminished(after 8 quizzes)
+	major 7th(after 15 quizzes)
+	minor 7th(after 15 quizzes)
+- Level 4 :
+	major
+	minor
+	augmented(after 5 quizzes)
+	diminished(after 5 quizzes)
+	major 7th(after 10 quizzes)
+	minor 7th(after 10 quizzes)
+	dominant 7th(after 15 quizzes)
+	diminished 7th(after 15 quizzes)
+	half-diminished 7th(after 20 quizzes)
+	augmented 7th(after 20 quizzes)
+
+After solving each questions, the data about the answer chord will be displayed.
+
+To forfeit the quiz set, press 'Back' button on the top-left corner. The set will be initialized.
+
+'Help' button shows information, update log.
+
+'Exit' button terminates the program.
+
+--- Programmer's note ---
+
+If there are any bugs or indirect components, please let me know!
+
+--- License ---
+
+The license of this project is specified on the LICENSE.TXT on the root directory of the project.
