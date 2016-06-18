@@ -4,8 +4,11 @@ Project Absolute Pitch
 
 Programmed by Sangheon Lee(evenharder)
 Program Language : Processing
-Additional Font : Google Noto Sans (https://www.google.com/get/noto/)
-Additional Libraries : controlP5 (https://github.com/sojamo/controlp5/)
+Additional Font :
+	Google Noto Sans (https://www.google.com/get/noto/)
+Additional Libraries :
+	controlP5 (https://github.com/sojamo/controlp5/)
+	Minim (https://github.com/ddf/Minim)
 
 --- Premable ---
 
