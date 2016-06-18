@@ -9,6 +9,9 @@ Additional Font :
 Additional Libraries :
 	controlP5 (https://github.com/sojamo/controlp5/)
 	Minim (https://github.com/ddf/Minim)
+Piano Pitch :
+	FL Studio 12.2 > Packs > Instruments > Keyboard > Close Grand
+	(https://www.image-line.com/support/FLHelp/html/app_copyright.htm)
 
 --- Premable ---
 
