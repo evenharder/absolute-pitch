@@ -71,8 +71,6 @@ void update()
 int command_enter=0;
 void keyPressed()
 {
-	println("command_enter: "+command_enter);
-	println("key: "+key);
 	if(Constant.isDebugMode) return;
 	else if(command_enter==0 && (key=='D' || key=='d')) command_enter++;
 	else if(command_enter==1 && (key=='E' || key=='e')) command_enter++;
